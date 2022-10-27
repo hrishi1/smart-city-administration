@@ -19,6 +19,8 @@ public class Hospital {
     private String location;
     private int rating;
     private String hospitalType;
+  
+    
 
     public PatientDir getPatientDir() {
         return patientDir;

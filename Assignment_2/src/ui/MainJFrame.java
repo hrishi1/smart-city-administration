@@ -14,6 +14,13 @@ import model.PersonDir;
 import model.DoctorDir;
 import model.PatientDir;
 import model.EncounterHistory;
+import model.UserAuthDir;
+import model.SystemAdmin;
+
+import model.Hospital;
+import model.Community;
+import model.City;
+import model.House;
 
 
 /**
@@ -34,12 +41,14 @@ public class MainJFrame extends javax.swing.JFrame {
     private DoctorDir doctorDir;
     private PatientDir patientDir;
     private EncounterHistory encounterHistory;
+    private UserAuthDir userAuthDir;
+    private SystemAdmin systemAdmin;
     
             
     public MainJFrame() {
         initComponents();
         
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);       
         
         cityDir = new CityDir();
         communityDir = new CommunityDir();
@@ -49,6 +58,42 @@ public class MainJFrame extends javax.swing.JFrame {
         doctorDir = new DoctorDir();
         patientDir = new PatientDir();
         encounterHistory = new EncounterHistory();
+        userAuthDir = new UserAuthDir();
+        systemAdmin = new SystemAdmin("admin","admin");
+        
+        //Default Hospital
+        Hospital h = hospitalDir.addNewHospital();
+        
+        h.setHospitalName("Hospital 1");
+        h.setHospitalType("Community Hospital");
+        h.setLocation("Boston");
+        h.setRating(9);
+        
+        //Default House
+        House house = houseDir.addNewHouse();
+        
+        house.setHouseID("House 1");
+        house.setHouseNum("1");
+        house.setStreet("Boylston Street");
+        house.setZipCode("02120");
+        
+        ///Default Community
+        Community c = communityDir.addNewCommunity();
+        
+        c.setCommunityName("Community 1");
+        c.setCommunityType("Organized Community");
+        c.setMajorityReligion("Christianity");
+        c.setHospitalDir(hospitalDir);
+        c.setHouseDir(houseDir);
+        
+        //Default City
+        City city = cityDir.addNewCity();
+        
+        city.setCityName("Boston");
+        city.setState("MA");
+        city.setCommunityDir(communityDir);
+        
+        
     }
 
     /**
@@ -60,23 +105,115 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
+        splitPane = new javax.swing.JSplitPane();
+        workArea = new javax.swing.JPanel();
+        lblTitle = new javax.swing.JLabel();
+        lblDetails = new javax.swing.JLabel();
+        lblDetails2 = new javax.swing.JLabel();
+        controlPanel = new javax.swing.JPanel();
+        btnLogin = new javax.swing.JButton();
+        btnPatientRegister = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        splitPane.setPreferredSize(new java.awt.Dimension(2043, 1000));
+
+        workArea.setMinimumSize(new java.awt.Dimension(200, 200));
+        workArea.setPreferredSize(new java.awt.Dimension(1018, 700));
+
+        lblTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblTitle.setText("AED Assignment 2");
+
+        lblDetails.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblDetails.setText("Hrishikesh S. Pawar");
+
+        lblDetails2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblDetails2.setText("NU ID: 002707307");
+
+        javax.swing.GroupLayout workAreaLayout = new javax.swing.GroupLayout(workArea);
+        workArea.setLayout(workAreaLayout);
+        workAreaLayout.setHorizontalGroup(
+            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(workAreaLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDetails2)
+                    .addComponent(lblDetails)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(1456, Short.MAX_VALUE))
+        );
+        workAreaLayout.setVerticalGroup(
+            workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(workAreaLayout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDetails)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDetails2)
+                .addContainerGap(833, Short.MAX_VALUE))
+        );
+
+        splitPane.setRightComponent(workArea);
+
+        controlPanel.setMinimumSize(new java.awt.Dimension(200, 200));
+        controlPanel.setPreferredSize(new java.awt.Dimension(1018, 700));
+
+        btnLogin.setText("Login");
+
+        btnPatientRegister.setText("Patient Register");
+        btnPatientRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPatientRegisterActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
+        controlPanel.setLayout(controlPanelLayout);
+        controlPanelLayout.setHorizontalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPatientRegister)
+                    .addGroup(controlPanelLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(btnLogin)))
+                .addContainerGap())
+        );
+        controlPanelLayout.setVerticalGroup(
+            controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addComponent(btnLogin)
+                .addGap(68, 68, 68)
+                .addComponent(btnPatientRegister)
+                .addContainerGap(774, Short.MAX_VALUE))
+        );
+
+        splitPane.setLeftComponent(controlPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPatientRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientRegisterActionPerformed
+        // TODO add your handling code here:
+        PatientRegPanel p = new PatientRegPanel(cityDir, communityDir, hospitalDir , houseDir);
+        splitPane.setRightComponent(p);
+    }//GEN-LAST:event_btnPatientRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,6 +251,13 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnPatientRegister;
+    private javax.swing.JPanel controlPanel;
+    private javax.swing.JLabel lblDetails;
+    private javax.swing.JLabel lblDetails2;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JSplitPane splitPane;
+    private javax.swing.JPanel workArea;
     // End of variables declaration//GEN-END:variables
 }

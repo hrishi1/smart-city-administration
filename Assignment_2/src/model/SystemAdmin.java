@@ -14,12 +14,10 @@ public class SystemAdmin {
     private String userName;
     private String password;
 
-    public void setUserName(String userName) {
+    public SystemAdmin(String userName, String password) {
         this.userName = userName;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
     }
+    
     
 }

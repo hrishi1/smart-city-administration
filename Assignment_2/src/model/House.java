@@ -12,6 +12,7 @@ import model.PersonDir;
  */
 public class House {
     private PersonDir personDir;
+    private String houseID;
     private String houseNum;
     private String street;
     private String zipCode;
@@ -24,6 +25,14 @@ public class House {
         this.personDir = personDir;
     }
 
+    public String getHouseID() {
+        return houseID;
+    }
+
+    public void setHouseID(String houseID) {
+        this.houseID = houseID;
+    }
+    
     public String getHouseNum() {
         return houseNum;
     }
