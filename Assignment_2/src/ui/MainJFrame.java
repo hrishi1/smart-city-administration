@@ -93,7 +93,6 @@ public class MainJFrame extends javax.swing.JFrame {
         city.setState("MA");
         city.setCommunityDir(communityDir);
         
-        
     }
 
     /**
@@ -211,7 +210,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void btnPatientRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatientRegisterActionPerformed
         // TODO add your handling code here:
-        PatientRegPanel p = new PatientRegPanel(cityDir, communityDir, hospitalDir , houseDir);
+        PatientRegPanel p = new PatientRegPanel(cityDir, communityDir, hospitalDir , houseDir, userAuthDir);
         splitPane.setRightComponent(p);
     }//GEN-LAST:event_btnPatientRegisterActionPerformed
 

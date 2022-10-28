@@ -13,7 +13,7 @@ import model.EncounterHistory;
 public class Patient {
     
     private EncounterHistory encounterHistory;
-    private boolean insured;
+    private String insured;
     private String emergencyContact;
     
 
@@ -25,13 +25,15 @@ public class Patient {
         this.encounterHistory = encounterHistory;
     }
 
-    public boolean isInsured() {
+    public String getInsured() {
         return insured;
     }
 
-    public void setInsured(boolean insured) {
+    public void setInsured(String insured) {
         this.insured = insured;
     }
+
+    
 
     public String getEmergencyContact() {
         return emergencyContact;
