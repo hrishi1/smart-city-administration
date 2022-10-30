@@ -583,6 +583,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
                                     patient.setEmergencyContact(emergencyContact);
                                     patient.setInsured(insured); 
                                     patient.setName(name);
+                                    patient.setHouseID(selectedHouse);
                                     
                                 }
                                 else { //If patientDir not already created
@@ -592,6 +593,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
                                     patient.setEmergencyContact(emergencyContact);
                                     patient.setInsured(insured);
                                     patient.setName(name);
+                                    patient.setHouseID(selectedHouse);
 
                                     h.setPatientDir(patientDir);
                                 }  

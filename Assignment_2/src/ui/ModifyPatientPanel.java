@@ -19,6 +19,8 @@ import model.Hospital;
 import model.HospitalDir;
 import model.House;
 import model.HouseDir;
+import model.Patient;
+import model.PatientDir;
 import model.Person;
 import model.PersonDir;
 import model.UserAuthDir;
@@ -27,30 +29,23 @@ import model.UserAuthDir;
  *
  * @author hrish
  */
-public class ModifyDoctorPanel extends javax.swing.JPanel {
+public class ModifyPatientPanel extends javax.swing.JPanel {
 
     private JSplitPane splitPane;
-    private CityDir cityDir;
     private UserAuthDir userAuthDir;
+    private CityDir cityDir;
     private CommunityDir communityDir;
     private String fName;
-    private String lName;
-    private String uName;
-    private String password;
-    private String phone;
-    private int age;
-    private String qualification;
-    private String email;
-    private String specialization;
+    private String insured;
 
     /**
-     * Creates new form ModifyDoctorPanel
+     * Creates new form ModifyPatientPanel
      */
-    public ModifyDoctorPanel() {
+    public ModifyPatientPanel() {
         initComponents();
     }
     
-    public ModifyDoctorPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane) {
+    public ModifyPatientPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane) {
         initComponents();
         
         this.splitPane = splitPane;
@@ -58,6 +53,44 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
         this.userAuthDir = userAuthDir;
         
         populateCitiesTable();
+    }
+    
+        private void populatePatients(PatientDir patDir) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        DefaultTableModel model = (DefaultTableModel) tblPatients.getModel();
+        model.setRowCount(0);
+        
+        for(Patient c : patDir.getPatientDir()) {
+            
+            Object[] row = new Object[11];
+            row[0] = c.getName();
+            row[1] = c.getInsured();
+            
+            model.addRow(row);
+            
+        } 
+    }
+    
+    private void populateCitiesTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        // House Table        
+        DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
+        model.setRowCount(0);
+        
+        for(City c : cityDir.getCityDir()) {
+            
+            Object[] row = new Object[11];
+            //row[0] = house;
+            row[0] = c.getCityName();
+            row[1] = c.getState();
+
+            
+            model.addRow(row);
+            
+            System.out.println("PopCities Fn");
+        }
     }
     
     private void populateHospitalsHousesTable(HospitalDir hospitalDir, HouseDir houseDir) {
@@ -113,49 +146,6 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
             
         }                
     }
-    
-    private void populateDoctors(DoctorDir doctorDir) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-        DefaultTableModel model = (DefaultTableModel) tblDoctors.getModel();
-        model.setRowCount(0);
-        
-        for(Doctor c : doctorDir.getDoctorDir()) {
-            
-            Object[] row = new Object[11];
-            row[0] = c.getName();
-            row[1] = c.getQualification();
-            row[2] = c.getSpecialization();
-            
-            model.addRow(row);
-            
-        } 
-    }
-    
-    
-    
-    
-    private void populateCitiesTable() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-        // House Table        
-        DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
-        model.setRowCount(0);
-        
-        for(City c : cityDir.getCityDir()) {
-            
-            Object[] row = new Object[11];
-            //row[0] = house;
-            row[0] = c.getCityName();
-            row[1] = c.getState();
-
-            
-            model.addRow(row);
-            
-            System.out.println("PopCities Fn");
-        }
-    }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -168,31 +158,28 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         txtFname = new javax.swing.JTextField();
-        txtQualification = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHospitals = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblCommunities = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblCities = new javax.swing.JTable();
-        btnUpdateDoctor = new javax.swing.JButton();
+        btnUpdatePatient = new javax.swing.JButton();
         btnDispCommunities = new javax.swing.JButton();
         btnDispHospitalsHouses = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        txtSpecialization = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblDoctors = new javax.swing.JTable();
-        btnDispDoctors = new javax.swing.JButton();
-        btnDeleteDoctor = new javax.swing.JButton();
+        tblPatients = new javax.swing.JTable();
+        btnDispPatients = new javax.swing.JButton();
+        btnDeletePatients = new javax.swing.JButton();
+        radioYes = new javax.swing.JRadioButton();
+        radioNo = new javax.swing.JRadioButton();
 
         jLabel1.setText("First Name:");
 
-        jLabel8.setText("Specialization:");
-
-        jLabel9.setText("Qualification:");
+        jLabel8.setText("Insured:");
 
         tblHospitals.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -236,10 +223,10 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
         ));
         jScrollPane4.setViewportView(tblCities);
 
-        btnUpdateDoctor.setText("Update Doctor");
-        btnUpdateDoctor.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdatePatient.setText("Update Patient");
+        btnUpdatePatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateDoctorActionPerformed(evt);
+                btnUpdatePatientActionPerformed(evt);
             }
         });
 
@@ -257,35 +244,39 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel11.setText("Modify Doctor");
+        jLabel11.setText("Modify Patient");
 
-        tblDoctors.setModel(new javax.swing.table.DefaultTableModel(
+        tblPatients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "First Name", "Qualification", "Specialization"
+                "First Name", "Insured"
             }
         ));
-        jScrollPane2.setViewportView(tblDoctors);
+        jScrollPane2.setViewportView(tblPatients);
 
-        btnDispDoctors.setText("Display Doctors");
-        btnDispDoctors.addActionListener(new java.awt.event.ActionListener() {
+        btnDispPatients.setText("Display Patients");
+        btnDispPatients.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDispDoctorsActionPerformed(evt);
+                btnDispPatientsActionPerformed(evt);
             }
         });
 
-        btnDeleteDoctor.setText("Delete Doctor");
-        btnDeleteDoctor.addActionListener(new java.awt.event.ActionListener() {
+        btnDeletePatients.setText("Delete Patients");
+        btnDeletePatients.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteDoctorActionPerformed(evt);
+                btnDeletePatientsActionPerformed(evt);
             }
         });
+
+        radioYes.setText("Yes");
+
+        radioNo.setText("No");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -294,51 +285,54 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9))
-                        .addGap(92, 92, 92)
+                        .addGap(55, 55, 55)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(txtFname, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(113, 113, 113)
+                                .addGap(581, 581, 581)
                                 .addComponent(jLabel11))
-                            .addComponent(txtSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQualification, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(btnUpdateDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(71, 71, 71)
+                                        .addComponent(btnDispCommunities)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnDispHospitalsHouses)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                        .addGap(142, 142, 142)
+                                        .addComponent(btnDispPatients)
+                                        .addGap(82, 82, 82)
+                                        .addComponent(btnDeletePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(81, 81, 81)
-                                .addComponent(btnDispCommunities)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnDispHospitalsHouses)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(137, 137, 137)
-                                .addComponent(btnDispDoctors)
-                                .addGap(36, 36, 36)
-                                .addComponent(btnDeleteDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(363, Short.MAX_VALUE))
+                                .addGap(71, 71, 71)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel8))
+                                .addGap(92, 92, 92)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFname, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(radioYes)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(radioNo))))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(btnUpdatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
@@ -348,31 +342,28 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(txtFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(155, 155, 155))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDispCommunities)
+                    .addComponent(btnDispHospitalsHouses)
+                    .addComponent(btnDispPatients)
+                    .addComponent(btnDeletePatients))
+                .addGap(104, 104, 104)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDispCommunities)
-                            .addComponent(btnDispHospitalsHouses)
-                            .addComponent(btnDispDoctors)
-                            .addComponent(btnDeleteDoctor))
+                        .addComponent(txtFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(radioYes)
+                            .addComponent(radioNo)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel1)
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(txtSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtQualification, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)))
-                .addComponent(btnUpdateDoctor)
-                .addGap(314, 314, 314))
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel8)))
+                .addGap(49, 49, 49)
+                .addComponent(btnUpdatePatient)
+                .addContainerGap(308, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -387,13 +378,19 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnUpdateDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateDoctorActionPerformed
+    private void btnUpdatePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePatientActionPerformed
 
         //Getting all the data from user input
         fName = txtFname.getText();
-        qualification = txtQualification.getText();
-        specialization = txtSpecialization.getText();
 
+        //Radio buttons
+        
+        if(radioYes.isSelected() == true) {
+            insured = "Yes";
+        }
+        else {
+            insured = "No";
+        }        
 
         int selectedRowIndex = tblCities.getSelectedRow();
 
@@ -424,36 +421,33 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select a hospital.");
             return;
         }
-                
 
         model = (DefaultTableModel) tblHospitals.getModel();
         String selectedHospital = (String) model.getValueAt(selectedRowIndex, 0);
-        
-        
-//        selectedRowIndex = tblHouses.getSelectedRow();
-//
-//        if (selectedRowIndex < 0 ) {
-//
-//            JOptionPane.showMessageDialog(this, "Please select a hospital.");
-//            return;
-//        }
-//                
-//
-//        model = (DefaultTableModel) tblHouses.getModel();
-//        String selectedHouse = (String) model.getValueAt(selectedRowIndex, 0);
-//        
-        
-        selectedRowIndex = tblDoctors.getSelectedRow();
+
+        //        selectedRowIndex = tblHouses.getSelectedRow();
+        //
+        //        if (selectedRowIndex < 0 ) {
+            //
+            //            JOptionPane.showMessageDialog(this, "Please select a hospital.");
+            //            return;
+            //        }
+        //
+        //
+        //        model = (DefaultTableModel) tblHouses.getModel();
+        //        String selectedHouse = (String) model.getValueAt(selectedRowIndex, 0);
+        //
+
+        selectedRowIndex = tblPatients.getSelectedRow();
 
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a doctor.");
+            JOptionPane.showMessageDialog(this, "Please select a patient.");
             return;
         }
-                
 
-        model = (DefaultTableModel) tblDoctors.getModel();
-        String doctorName = (String) model.getValueAt(selectedRowIndex, 0);        
+        model = (DefaultTableModel) tblPatients.getModel();
+        String patientName = (String) model.getValueAt(selectedRowIndex, 0);
 
         //Traversing cities to find the selected city
         ArrayList<City> cDir = cityDir.getCityDir();
@@ -478,131 +472,123 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                             if(h.getHospitalName().equalsIgnoreCase(selectedHospital))
                             {
                                 //If patientDir already present in the selected Hospital
-                                if(h.getDoctorDir() != null) {
-                                    
-                                    DoctorDir docDir = h.getDoctorDir();
-                                    
-                                    ArrayList<Doctor> dir = docDir.getDoctorDir();
-                                    
-                                    for(Doctor d : dir) {                                        
-                                        
-                                        if(d.getName().equalsIgnoreCase(doctorName)) {
-                                            
-                                            Doctor updatedDoc = new Doctor();
-                                            updatedDoc.setName(fName);
-                                            updatedDoc.setQualification(qualification);
-                                            updatedDoc.setSpecialization(specialization);
-                                            
-                                            docDir.updateDoctor(d, updatedDoc);
+                                if(h.getPatientDir() != null) {
 
-                                            populateDoctors(docDir);
-                                            
-                                            
-                                            String doctorHouse = d.getHouseID();
-                                        
-                                        
+                                    PatientDir patDir = h.getPatientDir();
 
+                                    ArrayList<Patient> dir = patDir.getPatientDir();
 
-                                        //Traversing houses to find the selected house
-                                        ArrayList<House> hoDir = houseDir.getHouseDir();
+                                    for(Patient d : dir) {
 
-                                        for(House hs: hoDir) {
-                                            if(hs.getHouseID().equalsIgnoreCase(doctorHouse))
-                                            {
-                                                
-                                                //If personDir already present in the selected House
-                                                if(hs.getPersonDir() != null) {
+                                        if(d.getName().equalsIgnoreCase(patientName)) {
 
-                                                    PersonDir personDir = hs.getPersonDir();
+                                            Patient updatedPat = new Patient();
+                                            updatedPat.setName(fName);
+                                            updatedPat.setInsured(insured);
 
-                                                    ArrayList<Person> pDir = personDir.getPersonDir();
+                                            patDir.updatePatient(d, updatedPat);
 
-                                                    for(Person p: pDir) {   
-                                                        
+                                            populatePatients(patDir);
 
-                                                        if(p.getFname().equalsIgnoreCase(doctorName)) {
+                                            String patientHouse = d.getHouseID();
 
-                                                            Person person = new Person();
+                                            //Traversing houses to find the selected house
+                                            ArrayList<House> hoDir = houseDir.getHouseDir();
 
-                                                            person.setFname(fName);
+                                            for(House hs: hoDir) {
+                                                if(hs.getHouseID().equalsIgnoreCase(patientHouse))
+                                                {
 
-                                                            personDir.updatePerson(p, person);
+                                                    //If personDir already present in the selected House
+                                                    if(hs.getPersonDir() != null) {
+
+                                                        PersonDir personDir = hs.getPersonDir();
+
+                                                        ArrayList<Person> pDir = personDir.getPersonDir();
+
+                                                        for(Person p: pDir) {
+
+                                                            if(p.getFname().equalsIgnoreCase(patientName)) {
+
+                                                                Person person = new Person();
+
+                                                                person.setFname(fName);
+
+                                                                personDir.updatePerson(p, person);
+                                                            }
                                                         }
+
                                                     }
 
+                                                    //Test
+//                                                    PersonDir personDir = hs.getPersonDir();
+//                                                    ArrayList<Person> p_temp = personDir.getPersonDir();
+//
+//                                                    for(Person p : p_temp) {
+//                                                        System.out.println("person:"+p.getFname());
+//                                                    }
                                                 }
-
-                                                //Test
-                                                                                                                PersonDir personDir = hs.getPersonDir();
-                                                                                                                ArrayList<Person> p_temp = personDir.getPersonDir();
-                                                
-                                                                                                                for(Person p : p_temp) {
-                                                                                                                            System.out.println("person:"+p.getFname());
-                                                                                                                        }
                                             }
-                                        }
-                                        
-                                        
+
                                             break;
                                         }
                                     }
                                 }
                                 //Test
-                                //                                                                doctorDir = h.getDoctorDir();
-                                //                                                                ArrayList<Doctor> p_temp = doctorDir.getDoctorDir();
+                                //                                                                doctorDir = h.getPatientDir();
+                                //                                                                ArrayList<Patient> p_temp = doctorDir.getPatientDir();
                                 //
-                                //                                                                for(Doctor p : p_temp) {
+                                //                                                                for(Patient p : p_temp) {
                                     //                                                                        System.out.println("doctor:"+p.getQualification());
                                     //                                                                    }
 
                             }
                         }
 
-// Code for updating Persons
+                        // Code for updating Persons
                         //Traversing houses to find the selected house
-//                        ArrayList<House> hoDir = houseDir.getHouseDir();
-//
-//                        for(House h: hoDir) {
-//                            if(h.getHouseID().equalsIgnoreCase(doctorHouse))
-//                            {
-//                                //If personDir already present in the selected House
-//                                if(h.getPersonDir() != null) {
-//                                    
-//                                    PersonDir personDir = h.getPersonDir();
-//                                    
-//                                    ArrayList<Person> dir = personDir.getPersonDir();
-//                                    
-//                                    for(Person p: dir) {   
-//                                        
-//                                        if(p.getFname().equalsIgnoreCase(doctorName)) {
-//
-//                                            Person person = new Person();
-//
-//                                            person.setFname(fName);
-//                                            
-//                                            personDir.updatePerson(p, person);
-//                                        }
-//                                    }
-//                                    
-//                                }
-//
-//                                //Test
-////                                                                                                PersonDir personDir = h.getPersonDir();
-////                                                                                                ArrayList<Person> p_temp = personDir.getPersonDir();
-////                                
-////                                                                                                for(Person p : p_temp) {
-////                                                                                                            System.out.println("person:"+p.getFname());
-////                                                                                                        }
-//                            }
-//                        }
+                        //                        ArrayList<House> hoDir = houseDir.getHouseDir();
+                        //
+                        //                        for(House h: hoDir) {
+                            //                            if(h.getHouseID().equalsIgnoreCase(doctorHouse))
+                            //                            {
+                                //                                //If personDir already present in the selected House
+                                //                                if(h.getPersonDir() != null) {
+                                    //
+                                    //                                    PersonDir personDir = h.getPersonDir();
+                                    //
+                                    //                                    ArrayList<Person> dir = personDir.getPersonDir();
+                                    //
+                                    //                                    for(Person p: dir) {
+                                        //
+                                        //                                        if(p.getFname().equalsIgnoreCase(doctorName)) {
+                                            //
+                                            //                                            Person person = new Person();
+                                            //
+                                            //                                            person.setFname(fName);
+                                            //
+                                            //                                            personDir.updatePerson(p, person);
+                                            //                                        }
+                                        //                                    }
+                                    //
+                                    //                                }
+                                //
+                                //                                //Test
+                                ////                                                                                                PersonDir personDir = h.getPersonDir();
+                                ////                                                                                                ArrayList<Person> p_temp = personDir.getPersonDir();
+                                ////
+                                ////                                                                                                for(Person p : p_temp) {
+                                    ////                                                                                                            System.out.println("person:"+p.getFname());
+                                    ////                                                                                                        }
+                                //                            }
+                            //                        }
 
                     }
 
                 }
             }
         }
-
-    }//GEN-LAST:event_btnUpdateDoctorActionPerformed
+    }//GEN-LAST:event_btnUpdatePatientActionPerformed
 
     private void btnDispCommunitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispCommunitiesActionPerformed
         // TODO add your handling code here:
@@ -674,9 +660,9 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDispHospitalsHousesActionPerformed
 
-    private void btnDispDoctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispDoctorsActionPerformed
+    private void btnDispPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispPatientsActionPerformed
         // TODO add your handling code here:
-        
+
         int selectedRowIndexCity = tblCities.getSelectedRow();
 
         if (selectedRowIndexCity < 0 ) {
@@ -705,8 +691,7 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                 ///DefaultTableModel model;
                 model = (DefaultTableModel) tblCommunities.getModel();
                 String communityName = (String) model.getValueAt(selectedRowIndex, 0);
-                
-                
+
                 selectedRowIndex = tblHospitals.getSelectedRow();
 
                 if (selectedRowIndex < 0 ) {
@@ -718,8 +703,6 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                 ///DefaultTableModel model;
                 model = (DefaultTableModel) tblHospitals.getModel();
                 String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
-                
-                
 
                 communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
 
@@ -727,32 +710,30 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
 
                 for(Community com: comDir) {
                     if(com.getCommunityName().equalsIgnoreCase(communityName)) {
-                        
+
                         HospitalDir hospitalDir = com.getHospitalDir();
                         ArrayList<Hospital> hospDir = hospitalDir.getHospitalDir();
-                        
+
                         for(Hospital h: hospDir) {
                             if(h.getHospitalName().equalsIgnoreCase(hospitalName)) {
-                                
-                                
-                                if (h.getDoctorDir() != null) {
-                                    populateDoctors(h.getDoctorDir());
+
+                                if (h.getPatientDir() != null) {
+                                    populatePatients(h.getPatientDir());
                                 }
                                 else {
-                                    JOptionPane.showMessageDialog(this, "No Doctors available.");
+                                    JOptionPane.showMessageDialog(this, "No Patients available.");
                                     return;
                                 }
                             }
-                        }                        
+                        }
                     }
                 }
             }
         }
-        
-        
-    }//GEN-LAST:event_btnDispDoctorsActionPerformed
 
-    private void btnDeleteDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDoctorActionPerformed
+    }//GEN-LAST:event_btnDispPatientsActionPerformed
+
+    private void btnDeletePatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePatientsActionPerformed
         // TODO add your handling code here:
         int selectedRowIndexCity = tblCities.getSelectedRow();
 
@@ -782,8 +763,7 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                 ///DefaultTableModel model;
                 model = (DefaultTableModel) tblCommunities.getModel();
                 String communityName = (String) model.getValueAt(selectedRowIndex, 0);
-                
-                
+
                 selectedRowIndex = tblHospitals.getSelectedRow();
 
                 if (selectedRowIndex < 0 ) {
@@ -795,9 +775,8 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                 ///DefaultTableModel model;
                 model = (DefaultTableModel) tblHospitals.getModel();
                 String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
-                
-                
-                selectedRowIndex = tblDoctors.getSelectedRow();
+
+                selectedRowIndex = tblPatients.getSelectedRow();
 
                 if (selectedRowIndex < 0 ) {
 
@@ -806,42 +785,37 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                 }
 
                 ///DefaultTableModel model;
-                model = (DefaultTableModel) tblDoctors.getModel();
-                String doctorName = (String) model.getValueAt(selectedRowIndex, 0);
-                
-                
+                model = (DefaultTableModel) tblPatients.getModel();
+                String patientName = (String) model.getValueAt(selectedRowIndex, 0);
 
                 communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
 
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
-                        
+
                 for(Community com: comDir) {
                     if(com.getCommunityName().equalsIgnoreCase(communityName)) {
-                        
+
                         HospitalDir hospitalDir = com.getHospitalDir();
                         ArrayList<Hospital> hospDir = hospitalDir.getHospitalDir();
-                        
+
                         for(Hospital h: hospDir) {
                             if(h.getHospitalName().equalsIgnoreCase(hospitalName)) {
-                                
-                                
-                                if (h.getDoctorDir() != null) {
-                                    
-                                    
-                                    DoctorDir docDir = h.getDoctorDir();
-                                    
-                                    ArrayList<Doctor> dir = docDir.getDoctorDir();
-                                    
-                                    for(Doctor d : dir) {                                                                                
-                                        
-                                        if(d.getName().equalsIgnoreCase(doctorName)) {
-                                            
-                                            docDir.deleteDoctor(d);
-                                            populateDoctors(docDir);
-                                            
-                                            
+
+                                if (h.getPatientDir() != null) {
+
+                                    PatientDir patDir = h.getPatientDir();
+
+                                    ArrayList<Patient> dir = patDir.getPatientDir();
+
+                                    for(Patient d : dir) {
+
+                                        if(d.getName().equalsIgnoreCase(patientName)) {
+
+                                            patDir.deletePatient(d);
+                                            populatePatients(patDir);
+
                                             String doctorHouse = d.getHouseID();
-                                            
+
                                             //Traversing houses to find the selected house
                                             HouseDir houseDir = com.getHouseDir();
                                             ArrayList<House> hoDir = houseDir.getHouseDir();
@@ -856,10 +830,10 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
 
                                                         ArrayList<Person> pDir = personDir.getPersonDir();
 
-                                                        for(Person p: pDir) {   
+                                                        for(Person p: pDir) {
 
-                                                            if(p.getFname().equalsIgnoreCase(doctorName)) {
-                                                                
+                                                            if(p.getFname().equalsIgnoreCase(patientName)) {
+
                                                                 personDir.deletePerson(p);
                                                                 break;
 
@@ -869,53 +843,53 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                                                     }
 
                                                     //Test
-                                                                                                                    PersonDir personDir = hs.getPersonDir();
-                                                                                                                    ArrayList<Person> p_temp = personDir.getPersonDir();
-                                                    
-                                                                                                                    for(Person p : p_temp) {
-                                                                                                                                System.out.println("person:"+p.getFname());
-                                                                                                                            }
+//                                                    PersonDir personDir = hs.getPersonDir();
+//                                                    ArrayList<Person> p_temp = personDir.getPersonDir();
+//
+//                                                    for(Person p : p_temp) {
+//                                                        System.out.println("person:"+p.getFname());
+//                                                    }
                                                 }
                                             }
-                                            
+
                                             break;
                                         }
                                     }
                                 }
                                 else {
-                                    JOptionPane.showMessageDialog(this, "No Doctors available.");
+                                    JOptionPane.showMessageDialog(this, "No Patients available.");
                                     return;
                                 }
                             }
-                        }        
+                        }
                     }
                 }
             }
         }
-    }//GEN-LAST:event_btnDeleteDoctorActionPerformed
+    }//GEN-LAST:event_btnDeletePatientsActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDeleteDoctor;
+    private javax.swing.JButton btnDeletePatients;
     private javax.swing.JButton btnDispCommunities;
-    private javax.swing.JButton btnDispDoctors;
     private javax.swing.JButton btnDispHospitalsHouses;
-    private javax.swing.JButton btnUpdateDoctor;
+    private javax.swing.JButton btnDispPatients;
+    private javax.swing.JButton btnUpdatePatient;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JRadioButton radioNo;
+    private javax.swing.JRadioButton radioYes;
     private javax.swing.JTable tblCities;
     private javax.swing.JTable tblCommunities;
-    private javax.swing.JTable tblDoctors;
     private javax.swing.JTable tblHospitals;
+    private javax.swing.JTable tblPatients;
     private javax.swing.JTextField txtFname;
-    private javax.swing.JTextField txtQualification;
-    private javax.swing.JTextField txtSpecialization;
     // End of variables declaration//GEN-END:variables
 }

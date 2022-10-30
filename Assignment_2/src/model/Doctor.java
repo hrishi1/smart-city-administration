@@ -17,6 +17,15 @@ public class Doctor {
     private String specialization;
     private int yearsOfExperience;
     private String name;
+    private String houseID;
+
+    public String getHouseID() {
+        return houseID;
+    }
+
+    public void setHouseID(String houseID) {
+        this.houseID = houseID;
+    }
 
     public String getName() {
         return name;

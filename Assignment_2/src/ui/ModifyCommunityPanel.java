@@ -29,6 +29,7 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
     private String communityType;
     private String cityName;
     private String state;
+    private String caller;
 
     /**
      * Creates new form ModifyCommunityPanel
@@ -37,12 +38,13 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public ModifyCommunityPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane) {
+    public ModifyCommunityPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane, String caller) {
         initComponents();
         
         this.splitPane = splitPane;
         this.cityDir = cityDir;
         this.userAuthDir = userAuthDir;
+        this.caller = caller;
         
         populateCitiesTable();
     }
@@ -318,10 +320,20 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
 
     private void btnModifyPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyPanelActionPerformed
         // TODO add your handling code here:
+        
+        if(caller == "SysAdmin") {
+        
+            SysAdminRUDPanel s = new SysAdminRUDPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
 
-        SysAdminRUDPanel s = new SysAdminRUDPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
-
-        splitPane.setRightComponent(s);
+            splitPane.setRightComponent(s);
+        }
+        else if(caller == "CommAdmin") {
+            
+            CAModifyHousesPanel s = new CAModifyHousesPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+                                        
+            splitPane.setRightComponent(s);
+        }
+        
     }//GEN-LAST:event_btnModifyPanelActionPerformed
 
     private void btnDislayComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDislayComActionPerformed

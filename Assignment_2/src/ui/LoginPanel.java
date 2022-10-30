@@ -228,17 +228,22 @@ public class LoginPanel extends javax.swing.JPanel {
                     
                     SySAdminPanel s = new SySAdminPanel(cityDir, uaDir, splitPane);//cityDir,uaDir);
                     
-//                    setPanel(s);
-//                    
                     splitPane.setRightComponent(s);
                     
                     
                 }
                 else if (userType.equalsIgnoreCase("Community Admin")) {
-                    System.out.println("Community Admin Logged In");
+                    
+                    CAModifyHousesPanel s = new CAModifyHousesPanel(cityDir, uaDir, splitPane);//cityDir,uaDir);
+                                        
+                    splitPane.setRightComponent(s);
+                    
                 }
                 else if (userType.equalsIgnoreCase("Hospital Admin")) {
-                    System.out.println("Hospital Admin Logged In");
+                    
+                    HAModifyPanel s = new HAModifyPanel(cityDir, uaDir, splitPane);//cityDir,uaDir);
+                                        
+                    splitPane.setRightComponent(s);
                     
                 }
                 

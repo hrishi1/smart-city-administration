@@ -25,7 +25,7 @@ import model.UserAuthDir;
  *
  * @author hrish
  */
-public class SysAdminRUDPanel extends javax.swing.JPanel {
+public class HAModifyPanel extends javax.swing.JPanel {
 
     private JSplitPane splitPane;
     private CityDir cityDir;
@@ -37,11 +37,11 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
     /**
      * Creates new form SysAdminRUDPanel
      */
-    public SysAdminRUDPanel() {
+    public HAModifyPanel() {
         initComponents();
     }
     
-    public SysAdminRUDPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane) {
+    public HAModifyPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane) {
         initComponents();
         
         this.splitPane = splitPane;
@@ -125,7 +125,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         tblHospitals = new javax.swing.JTable();
         btnDislayCom = new javax.swing.JButton();
         btnDisplayHosp = new javax.swing.JButton();
-        btnBackToSysAdmin = new javax.swing.JButton();
         btnDeleteHosp = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -137,8 +136,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         radioCommunity = new javax.swing.JRadioButton();
         radioPrivate = new javax.swing.JRadioButton();
         btnUpdateHospital = new javax.swing.JButton();
-        btnModifyHouses = new javax.swing.JButton();
-        btnModifyComm = new javax.swing.JButton();
         btnModifyDoc = new javax.swing.JButton();
         btnModifyPat = new javax.swing.JButton();
 
@@ -200,13 +197,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBackToSysAdmin.setText("Back to System Admin Panel");
-        btnBackToSysAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackToSysAdminActionPerformed(evt);
-            }
-        });
-
         btnDeleteHosp.setText("Delete Hospital");
         btnDeleteHosp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,20 +232,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
             }
         });
 
-        btnModifyHouses.setText("Modify Houses");
-        btnModifyHouses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModifyHousesActionPerformed(evt);
-            }
-        });
-
-        btnModifyComm.setText("Modify Cities/Communities");
-        btnModifyComm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModifyCommActionPerformed(evt);
-            }
-        });
-
         btnModifyDoc.setText("Modify Doctors");
         btnModifyDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,8 +256,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                         .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBackToSysAdmin)
-                                .addGap(199, 199, 199)
+                                .addGap(434, 434, 434)
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -319,23 +294,17 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                         .addGap(71, 71, 71)
                         .addComponent(btnDeleteHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(btnModifyHouses, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModifyComm, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(366, 366, 366)
                         .addComponent(btnModifyDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(186, 186, 186)
                         .addComponent(btnModifyPat, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnBackToSysAdmin))
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,8 +334,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                 .addComponent(btnUpdateHospital)
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModifyHouses)
-                    .addComponent(btnModifyComm)
                     .addComponent(btnModifyDoc)
                     .addComponent(btnModifyPat))
                 .addContainerGap(128, Short.MAX_VALUE))
@@ -441,16 +408,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnDisplayHospActionPerformed
-
-    private void btnBackToSysAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToSysAdminActionPerformed
-        // TODO add your handling code here:
-        SySAdminPanel s = new SySAdminPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
-
-        //                    setPanel(s);
-        //
-        splitPane.setRightComponent(s);
-
-    }//GEN-LAST:event_btnBackToSysAdminActionPerformed
 
     private void btnDeleteHospActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHospActionPerformed
         // TODO add your handling code here:
@@ -660,22 +617,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnModifyDocActionPerformed
 
-    private void btnModifyHousesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyHousesActionPerformed
-        // TODO add your handling code here:
-        
-        ModifyHousesPanel s = new ModifyHousesPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
-                    
-        splitPane.setRightComponent(s);   
-    }//GEN-LAST:event_btnModifyHousesActionPerformed
-
-    private void btnModifyCommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyCommActionPerformed
-        // TODO add your handling code here:
-        
-        ModifyCommunityPanel s = new ModifyCommunityPanel(cityDir, userAuthDir, splitPane,"SysAdmin");//cityDir,uaDir);
-                    
-        splitPane.setRightComponent(s);
-    }//GEN-LAST:event_btnModifyCommActionPerformed
-
     private void btnModifyPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyPatActionPerformed
         // TODO add your handling code here:
         ModifyPatientPanel s = new ModifyPatientPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
@@ -686,13 +627,10 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBackToSysAdmin;
     private javax.swing.JButton btnDeleteHosp;
     private javax.swing.JButton btnDislayCom;
     private javax.swing.JButton btnDisplayHosp;
-    private javax.swing.JButton btnModifyComm;
     private javax.swing.JButton btnModifyDoc;
-    private javax.swing.JButton btnModifyHouses;
     private javax.swing.JButton btnModifyPat;
     private javax.swing.JButton btnUpdateHospital;
     private javax.swing.JLabel jLabel1;

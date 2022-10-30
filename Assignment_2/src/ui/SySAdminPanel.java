@@ -609,6 +609,7 @@ public class SySAdminPanel extends javax.swing.JPanel {
                                     doctor.setQualification(qualification);
                                     doctor.setSpecialization(specialization);
                                     doctor.setName(name);
+                                    doctor.setHouseID(selectedHouse);
 
                                 }
                                 else { //If patientDir not already created
@@ -618,6 +619,7 @@ public class SySAdminPanel extends javax.swing.JPanel {
                                     doctor.setQualification(qualification);
                                     doctor.setSpecialization(specialization);
                                     doctor.setName(name);
+                                    doctor.setHouseID(selectedHouse);
 
                                     h.setDoctorDir(doctorDir);
                                 }

@@ -15,6 +15,15 @@ public class Patient {
     private EncounterHistory encounterHistory;
     private String insured;
     private String name;
+    private String houseID;
+
+    public String getHouseID() {
+        return houseID;
+    }
+
+    public void setHouseID(String houseID) {
+        this.houseID = houseID;
+    }
 
     public String getName() {
         return name;
