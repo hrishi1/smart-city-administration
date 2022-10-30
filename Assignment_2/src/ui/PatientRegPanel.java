@@ -53,6 +53,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
     private String email;
     private String insured;
     private String emergencyContact;
+    private String name;
     
     private String cityName;
     
@@ -116,7 +117,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
         }                
     }
         
-    private void populateHospitalsHousesTable(HospitalDir hospitalDir, HouseDir hoseDir) {
+    private void populateHospitalsHousesTable(HospitalDir hospitalDir, HouseDir houseDir) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
         DefaultTableModel model = (DefaultTableModel) tblHospitals.getModel();
@@ -464,6 +465,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
         
         //Getting all the data from user input
         fName = txtFname.getText();
+        name = txtFname.getText();
         lName = txtLname.getText();
         uName = txtUname.getText();
         password = txtPass.getText();
@@ -477,7 +479,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
 
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            JOptionPane.showMessageDialog(this, "Please select a house.");
             return;
         }
         
@@ -490,7 +492,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
 
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
         
@@ -502,7 +504,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
 
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            JOptionPane.showMessageDialog(this, "Please select a community.");
             return;
         }
         
@@ -514,7 +516,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
 
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            JOptionPane.showMessageDialog(this, "Please select a hospital.");
             return;
         }
         
@@ -554,14 +556,14 @@ public class PatientRegPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
         
         for(City c: cDir) {
-            if(c.getCityName() == selectedCity) {
+            if(c.getCityName().equalsIgnoreCase(selectedCity)) {
                 CommunityDir communityDir = c.getCommunityDir();
                 
                 //Traversing communities to find the selected community
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
                 
                 for(Community com: comDir) {
-                    if(com.getCommunityName() == selectedCommunity) {
+                    if(com.getCommunityName().equalsIgnoreCase(selectedCommunity)) {
                         
                         
                         HospitalDir hospitalDir = com.getHospitalDir();
@@ -571,7 +573,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
                         ArrayList<Hospital> hDir = hospitalDir.getHospitalDir();
                         
                         for(Hospital h: hDir) {
-                            if(h.getHospitalName() == selectedHospital)
+                            if(h.getHospitalName().equalsIgnoreCase(selectedHospital))
                             {                
                                 //If patientDir already present in the selected Hospital
                                 if(h.getPatientDir() != null) {
@@ -579,7 +581,9 @@ public class PatientRegPanel extends javax.swing.JPanel {
 
                                     Patient patient = patientDir.addNewPatient(); 
                                     patient.setEmergencyContact(emergencyContact);
-                                    patient.setInsured(insured); //****** Take input from radio here
+                                    patient.setInsured(insured); 
+                                    patient.setName(name);
+                                    
                                 }
                                 else { //If patientDir not already created
                                     patientDir = new PatientDir();
@@ -587,6 +591,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
                                     Patient patient = patientDir.addNewPatient(); 
                                     patient.setEmergencyContact(emergencyContact);
                                     patient.setInsured(insured);
+                                    patient.setName(name);
 
                                     h.setPatientDir(patientDir);
                                 }  
@@ -607,7 +612,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
                         ArrayList<House> hoDir = houseDir.getHouseDir();
                         
                         for(House h: hoDir) {
-                            if(h.getHouseID() == selectedHouse)
+                            if(h.getHouseID().equalsIgnoreCase(selectedHouse))
                             {                
                                 //If personDir already present in the selected House
                                 if(h.getPersonDir() != null) {
@@ -659,7 +664,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
          
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
         
@@ -681,25 +686,69 @@ public class PatientRegPanel extends javax.swing.JPanel {
     private void btnDispHospitalsHousesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispHospitalsHousesActionPerformed
         // TODO add your handling code here:
         
-        int selectedRowIndex = tblCommunities.getSelectedRow();
-         
-        if (selectedRowIndex < 0 ) {
+        int selectedRowIndexCity = tblCities.getSelectedRow();
 
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+        if (selectedRowIndexCity < 0 ) {
+
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
-        
-        DefaultTableModel model;        
-        model = (DefaultTableModel) tblCommunities.getModel();        
-        String communityName = (String) model.getValueAt(selectedRowIndex, 0);        
-        
-        ArrayList<Community> cDir = communityDir.getCommunityDir();
-        
-        for(Community c: cDir) {            
-            if(c.getCommunityName().contains(communityName)) {      
-                populateHospitalsHousesTable(c.getHospitalDir(),c.getHouseDir());
-            }            
+
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblCities.getModel();
+        String cityName = (String) model.getValueAt(selectedRowIndexCity, 0);
+
+        ArrayList<City> cDir = cityDir.getCityDir();
+
+        for(City c: cDir) {
+            if(c.getCityName() == (cityName)) {
+                
+                int selectedRowIndex = tblCommunities.getSelectedRow();
+
+                if (selectedRowIndex < 0 ) {
+
+                    JOptionPane.showMessageDialog(this, "Please select a community.");
+                    return;
+                }
+
+                ///DefaultTableModel model;
+                model = (DefaultTableModel) tblCommunities.getModel();
+                String communityName = (String) model.getValueAt(selectedRowIndex, 0);
+                
+                
+                communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
+                
+                ArrayList<Community> comDir = communityDir.getCommunityDir();
+                
+                for(Community com: comDir) {
+                    if(com.getCommunityName().contains(communityName)) {
+                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    }
+                }       
+            }
         }
+        
+//        int selectedRowIndex = tblCommunities.getSelectedRow();
+//         
+//        if (selectedRowIndex < 0 ) {
+//
+//            JOptionPane.showMessageDialog(this, "Please select a community.");
+//            return;
+//        }
+//        
+//        DefaultTableModel model;        
+//        model = (DefaultTableModel) tblCommunities.getModel();        
+//        String communityName = (String) model.getValueAt(selectedRowIndex, 0);        
+//        
+//        ArrayList<Community> cDir = communityDir.getCommunityDir();
+//        
+//        for(Community c: cDir) {            
+//            if(c.getCommunityName().contains(communityName)) {      
+//                populateHospitalsHousesTable(c.getHospitalDir(),c.getHouseDir());
+//            }            
+//        }
+
+        
         
     }//GEN-LAST:event_btnDispHospitalsHousesActionPerformed
 

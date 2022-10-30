@@ -16,6 +16,15 @@ public class Doctor {
     private String qualification;
     private String specialization;
     private int yearsOfExperience;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public EncounterHistory getEncounterHistory() {
         return encounterHistory;

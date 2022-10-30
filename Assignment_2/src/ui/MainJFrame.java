@@ -5,7 +5,9 @@
  */
 package ui;
 
+import java.awt.CardLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import model.CityDir;
 import model.CommunityDir;
 import model.HouseDir;
@@ -21,6 +23,7 @@ import model.Hospital;
 import model.Community;
 import model.City;
 import model.House;
+import model.UserAuth;
 
 
 /**
@@ -43,7 +46,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private EncounterHistory encounterHistory;
     private UserAuthDir userAuthDir;
     private SystemAdmin systemAdmin;
-    
+    private UserAuth userAuth;
             
     public MainJFrame() {
         initComponents();
@@ -61,13 +64,18 @@ public class MainJFrame extends javax.swing.JFrame {
         userAuthDir = new UserAuthDir();
         systemAdmin = new SystemAdmin("admin","admin");
         
+        // Adding System Admin in UserAuth
+        userAuth = userAuthDir.addNewUserAuth();
+        userAuth.setPassword("admin");
+        userAuth.setUserName("admin");
+        userAuth.setUserType("System Admin");
+        
         //Default Hospital
         Hospital h = hospitalDir.addNewHospital();
         
         h.setHospitalName("Hospital 1");
-        h.setHospitalType("Community Hospital");
-        h.setLocation("Boston");
-        h.setRating(9);
+        h.setHospitalType("Community Hospital");        
+        h.setRating(3);
         
         //Default House
         House house = houseDir.addNewHouse();
@@ -77,11 +85,11 @@ public class MainJFrame extends javax.swing.JFrame {
         house.setStreet("Boylston Street");
         house.setZipCode("02120");
         
-        ///Default Community
+        // Default Community
         Community c = communityDir.addNewCommunity();
         
         c.setCommunityName("Community 1");
-        c.setCommunityType("Organized Community");
+        c.setCommunityType("Urban Community");
         c.setMajorityReligion("Christianity");
         c.setHospitalDir(hospitalDir);
         c.setHouseDir(houseDir);
@@ -139,7 +147,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(lblDetails2)
                     .addComponent(lblDetails)
                     .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1456, Short.MAX_VALUE))
+                .addContainerGap(613, Short.MAX_VALUE))
         );
         workAreaLayout.setVerticalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +158,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(lblDetails)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDetails2)
-                .addContainerGap(833, Short.MAX_VALUE))
+                .addContainerGap(583, Short.MAX_VALUE))
         );
 
         splitPane.setRightComponent(workArea);
@@ -159,6 +167,11 @@ public class MainJFrame extends javax.swing.JFrame {
         controlPanel.setPreferredSize(new java.awt.Dimension(1018, 700));
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnPatientRegister.setText("Patient Register");
         btnPatientRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -172,22 +185,22 @@ public class MainJFrame extends javax.swing.JFrame {
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPatientRegister)
                     .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
+                        .addGap(34, 34, 34)
                         .addComponent(btnLogin)))
-                .addContainerGap())
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addGap(102, 102, 102)
                 .addComponent(btnLogin)
-                .addGap(68, 68, 68)
+                .addGap(18, 18, 18)
                 .addComponent(btnPatientRegister)
-                .addContainerGap(774, Short.MAX_VALUE))
+                .addContainerGap(570, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);
@@ -196,13 +209,11 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
+            .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -213,6 +224,24 @@ public class MainJFrame extends javax.swing.JFrame {
         PatientRegPanel p = new PatientRegPanel(cityDir, communityDir, hospitalDir , houseDir, userAuthDir);
         splitPane.setRightComponent(p);
     }//GEN-LAST:event_btnPatientRegisterActionPerformed
+
+//    public void setPanel(JPanel panel) {
+//        splitPane.setRightComponent(panel);
+//    }
+        
+    
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+            
+        LoginPanel l = new LoginPanel(cityDir,userAuthDir,splitPane);
+            splitPane.setRightComponent(l);
+            
+//            System.out.println(TempPanel.getLayout().getClass());
+//            
+//            CardLayout card = (CardLayout) TempPanel.getLayout();
+//            //splitPane.setRightComponent(TempPanel);
+//            card.show(TempPanel, "panelOne");
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,7 +273,8 @@ public class MainJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainJFrame().setVisible(true);
+                MainJFrame jFrame = new MainJFrame();
+                jFrame.setVisible(true);
             }
         });
     }
