@@ -217,7 +217,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
 
         jLabel13.setText("Street:");
 
-        btnModifyComm.setText("Modify Cities/Communities");
+        btnModifyComm.setText("Modify Communities");
         btnModifyComm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyCommActionPerformed(evt);
@@ -562,7 +562,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
     private void btnModifyCommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyCommActionPerformed
         // TODO add your handling code here:
         
-        ModifyCommunityPanel s = new ModifyCommunityPanel(cityDir, userAuthDir, splitPane, "CommAdmin");//cityDir,uaDir);
+        CAModifyCommunityPanel s = new CAModifyCommunityPanel(cityDir, userAuthDir, splitPane, "CommAdmin");//cityDir,uaDir);
                     
         splitPane.setRightComponent(s);
         
@@ -570,6 +570,11 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
 
     private void btnModifyPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyPersonActionPerformed
         // TODO add your handling code here:
+        
+        ModifyPerson s = new ModifyPerson(cityDir, userAuthDir, splitPane, "CommAdmin");//cityDir,uaDir);
+                    
+        splitPane.setRightComponent(s);
+        
     }//GEN-LAST:event_btnModifyPersonActionPerformed
 
 

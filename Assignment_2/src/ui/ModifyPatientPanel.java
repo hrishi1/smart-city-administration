@@ -37,6 +37,7 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
     private CommunityDir communityDir;
     private String fName;
     private String insured;
+    private String caller;
 
     /**
      * Creates new form ModifyPatientPanel
@@ -45,12 +46,13 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public ModifyPatientPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane) {
+    public ModifyPatientPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane, String caller) {
         initComponents();
         
         this.splitPane = splitPane;
         this.cityDir = cityDir;
         this.userAuthDir = userAuthDir;
+        this.caller = caller;
         
         populateCitiesTable();
     }
@@ -176,6 +178,7 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         btnDeletePatients = new javax.swing.JButton();
         radioYes = new javax.swing.JRadioButton();
         radioNo = new javax.swing.JRadioButton();
+        btnBack = new javax.swing.JButton();
 
         jLabel1.setText("First Name:");
 
@@ -278,6 +281,13 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 
         radioNo.setText("No");
 
+        btnBack.setText("Back to Modify");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -285,10 +295,14 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(btnUpdatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(581, 581, 581)
+                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(398, 398, 398)
                                 .addComponent(jLabel11))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,25 +337,22 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addComponent(radioYes)
                                         .addGap(18, 18, 18)
-                                        .addComponent(radioNo))))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(btnUpdatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(radioNo)))))))
                 .addContainerGap(164, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel11)
+                    .addComponent(btnBack))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDispCommunities)
@@ -696,7 +707,7 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 
                 if (selectedRowIndex < 0 ) {
 
-                    JOptionPane.showMessageDialog(this, "Please select a community.");
+                    JOptionPane.showMessageDialog(this, "Please select a Hospital.");
                     return;
                 }
 
@@ -868,9 +879,26 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnDeletePatientsActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+
+        if(caller == "SysAdmin") {
+            SysAdminRUDPanel s = new SysAdminRUDPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+
+        splitPane.setRightComponent(s);
+        }
+        else if(caller == "HospAdmin") {
+            HAModifyPanel s = new HAModifyPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+
+        splitPane.setRightComponent(s);
+        }
+
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDeletePatients;
     private javax.swing.JButton btnDispCommunities;
     private javax.swing.JButton btnDispHospitalsHouses;

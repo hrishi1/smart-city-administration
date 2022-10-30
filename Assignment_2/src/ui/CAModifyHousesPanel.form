@@ -278,7 +278,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnModifyComm">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Modify Cities/Communities"/>
+        <Property name="text" type="java.lang.String" value="Modify Communities"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifyCommActionPerformed"/>

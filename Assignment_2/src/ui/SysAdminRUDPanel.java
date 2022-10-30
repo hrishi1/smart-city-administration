@@ -654,7 +654,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
 
     private void btnModifyDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyDocActionPerformed
         // TODO add your handling code here:
-        ModifyDoctorPanel s = new ModifyDoctorPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+        ModifyDoctorPanel s = new ModifyDoctorPanel(cityDir, userAuthDir, splitPane, "SysAdmin");//cityDir,uaDir);
                     
         splitPane.setRightComponent(s);
         
@@ -678,7 +678,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
 
     private void btnModifyPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyPatActionPerformed
         // TODO add your handling code here:
-        ModifyPatientPanel s = new ModifyPatientPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+        ModifyPatientPanel s = new ModifyPatientPanel(cityDir, userAuthDir, splitPane,"SysAdmin");//cityDir,uaDir);
                     
         splitPane.setRightComponent(s);
         

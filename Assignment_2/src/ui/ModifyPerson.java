@@ -1,0 +1,860 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package ui;
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
+import model.City;
+import model.CityDir;
+import model.Community;
+import model.CommunityDir;
+import model.Hospital;
+import model.HospitalDir;
+import model.House;
+import model.HouseDir;
+import model.Patient;
+import model.PatientDir;
+import model.Person;
+import model.PersonDir;
+import model.UserAuthDir;
+
+/**
+ *
+ * @author hrish
+ */
+public class ModifyPerson extends javax.swing.JPanel {
+
+    private JSplitPane splitPane;
+    private CityDir cityDir;
+    private UserAuthDir userAuthDir;
+    private String caller;
+    private CommunityDir communityDir;
+    
+    private String uName;
+    private String fName;
+    private String lName;
+    private int age;
+    private String gender;
+    private String phone;
+    private String email;
+    private String name;
+
+    /**
+     * Creates new form ModifyPerson
+     */
+    public ModifyPerson() {
+        initComponents();
+    }
+    
+    public ModifyPerson(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane, String caller) {
+        initComponents();
+        
+        this.splitPane = splitPane;
+        this.cityDir = cityDir;
+        this.userAuthDir = userAuthDir;
+        this.caller = caller;
+        
+        populateCitiesTable();
+    }
+    
+    private void populatePersons(PersonDir patDir) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        DefaultTableModel model = (DefaultTableModel) tblPersons.getModel();
+        model.setRowCount(0);
+        
+        for(Person c : patDir.getPersonDir()) {
+            
+            Object[] row = new Object[11];
+            row[0] = c.getFname();
+            row[1] = c.getLname();
+            row[2] = c.getAge();
+            row[3] = c.getGender();
+            row[4] = c.getPhoneNumber();
+            row[5] = c.getEmail();
+            
+            model.addRow(row);            
+        } 
+    }
+    
+    private void populateHospitalsHousesTable(HospitalDir hospitalDir, HouseDir houseDir) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+//        DefaultTableModel model = (DefaultTableModel) tblHouses.getModel();
+//        model.setRowCount(0);
+//        
+//        for(Hospital c : hospitalDir.getHospitalDir()) {
+//            
+//            Object[] row = new Object[11];
+//            //row[0] = house;
+//            row[0] = c.getHospitalName();
+//            row[1] = c.getRating();
+//            row[2] = c.getHospitalType();
+//
+//            
+//            model.addRow(row);
+            
+        DefaultTableModel model = (DefaultTableModel) tblHouses.getModel();
+        model.setRowCount(0);
+        
+        for(House h : houseDir.getHouseDir()) {
+            
+            Object[]row = new Object[11];
+            //row[0] = house;
+            row[0] = h.getHouseID();
+
+            
+            model.addRow(row);
+            
+        }                     
+    }
+    
+    private void populateCommunitiesTable(CommunityDir communityDir) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        DefaultTableModel model = (DefaultTableModel) tblCommunities.getModel();
+        model.setRowCount(0);
+        
+        for(Community c : communityDir.getCommunityDir()) {
+            
+            Object[] row = new Object[11];
+            //row[0] = house;
+            row[0] = c.getCommunityName();
+            row[1] = c.getMajorityReligion();
+            row[2] = c.getCommunityType();
+
+            
+            model.addRow(row);
+        }                
+    }
+    
+    private void populateCitiesTable() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        // House Table        
+        DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
+        model.setRowCount(0);
+        
+        for(City c : cityDir.getCityDir()) {
+            
+            Object[] row = new Object[11];
+            //row[0] = house;
+            row[0] = c.getCityName();
+            row[1] = c.getState();
+
+            
+            model.addRow(row);
+            
+            System.out.println("PopCities Fn");
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblHouses = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblCommunities = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblCities = new javax.swing.JTable();
+        btnUpdatePerson = new javax.swing.JButton();
+        btnDispCommunities = new javax.swing.JButton();
+        btnDispHospitalsHouses = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblPersons = new javax.swing.JTable();
+        btnDispPersons = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        txtLname2 = new javax.swing.JTextField();
+        txtFname = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        txtPhone2 = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        txtEmail2 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtUname2 = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        txtAge2 = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        radioMale2 = new javax.swing.JRadioButton();
+        radioFemale2 = new javax.swing.JRadioButton();
+
+        tblHouses.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Houses"
+            }
+        ));
+        jScrollPane1.setViewportView(tblHouses);
+
+        tblCommunities.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Communities"
+            }
+        ));
+        jScrollPane3.setViewportView(tblCommunities);
+
+        tblCities.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Cities"
+            }
+        ));
+        jScrollPane4.setViewportView(tblCities);
+
+        btnUpdatePerson.setText("Update Person");
+        btnUpdatePerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdatePersonActionPerformed(evt);
+            }
+        });
+
+        btnDispCommunities.setText("Display Communities");
+        btnDispCommunities.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDispCommunitiesActionPerformed(evt);
+            }
+        });
+
+        btnDispHospitalsHouses.setText("Display Houses");
+        btnDispHospitalsHouses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDispHospitalsHousesActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Modify Person");
+
+        tblPersons.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "First Name", "Last Name", "Age", "Gender", "Phone", "Email"
+            }
+        ));
+        jScrollPane2.setViewportView(tblPersons);
+
+        btnDispPersons.setText("Display Persons");
+        btnDispPersons.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDispPersonsActionPerformed(evt);
+            }
+        });
+
+        btnBack.setText("Back to Modify");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("First Name:");
+
+        jLabel24.setText("Last Name:");
+
+        jLabel25.setText("Phone Number:");
+
+        jLabel26.setText("Email ID:");
+
+        jLabel8.setText("User Name:");
+
+        txtUname2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUname2ActionPerformed(evt);
+            }
+        });
+
+        jLabel27.setText("Age:");
+
+        txtAge2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAge2ActionPerformed(evt);
+            }
+        });
+
+        jLabel28.setText("Gender:");
+
+        radioMale2.setText("Male");
+
+        radioFemale2.setText("Female");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel27))
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtAge2)
+                            .addComponent(txtUname2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel28))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(398, 398, 398)
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(btnDispCommunities)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDispHospitalsHouses))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGap(142, 142, 142)
+                                .addComponent(btnDispPersons))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnUpdatePerson, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel24))
+                            .addGap(49, 49, 49)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtLname2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                                .addComponent(txtFname))
+                            .addGap(48, 48, 48)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel25)
+                                .addComponent(jLabel26))
+                            .addGap(42, 42, 42)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(radioMale2)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(radioFemale2))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtEmail2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPhone2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(144, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(btnBack))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDispCommunities)
+                    .addComponent(btnDispHospitalsHouses)
+                    .addComponent(btnDispPersons))
+                .addGap(99, 99, 99)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1))
+                            .addGap(33, 33, 33)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtLname2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel26)
+                                .addComponent(txtEmail2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel24))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtPhone2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel25)))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUname2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel28)
+                    .addComponent(radioMale2)
+                    .addComponent(radioFemale2))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAge2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27)
+                    .addComponent(btnUpdatePerson))
+                .addContainerGap(287, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+
+        if(caller == "SysAdmin") {
+            SysAdminRUDPanel s = new SysAdminRUDPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+
+        splitPane.setRightComponent(s);
+        }
+        else if(caller == "HospAdmin") {
+            HAModifyPanel s = new HAModifyPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+
+        splitPane.setRightComponent(s);
+        }
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnDispPersonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispPersonsActionPerformed
+        // TODO add your handling code here:
+
+        int selectedRowIndexCity = tblCities.getSelectedRow();
+
+        if (selectedRowIndexCity < 0 ) {
+
+            JOptionPane.showMessageDialog(this, "Please select a city.");
+            return;
+        }
+
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblCities.getModel();
+        String cityName = (String) model.getValueAt(selectedRowIndexCity, 0);
+
+        ArrayList<City> cDir = cityDir.getCityDir();
+
+        for(City c: cDir) {
+            if(c.getCityName().equalsIgnoreCase(cityName)) {
+
+                int selectedRowIndex = tblCommunities.getSelectedRow();
+
+                if (selectedRowIndex < 0 ) {
+
+                    JOptionPane.showMessageDialog(this, "Please select a community.");
+                    return;
+                }
+
+                ///DefaultTableModel model;
+                model = (DefaultTableModel) tblCommunities.getModel();
+                String communityName = (String) model.getValueAt(selectedRowIndex, 0);
+
+                selectedRowIndex = tblHouses.getSelectedRow();
+
+                if (selectedRowIndex < 0 ) {
+
+                    JOptionPane.showMessageDialog(this, "Please select a House.");
+                    return;
+                }
+
+                ///DefaultTableModel model;
+                model = (DefaultTableModel) tblHouses.getModel();
+                String houseName = (String) model.getValueAt(selectedRowIndex, 0);
+
+                communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
+
+                ArrayList<Community> comDir = communityDir.getCommunityDir();
+
+                for(Community com: comDir) {
+                    if(com.getCommunityName().equalsIgnoreCase(communityName)) {
+
+                        HouseDir houseDir = com.getHouseDir();
+                        ArrayList<House> hDir = houseDir.getHouseDir();
+
+                        for(House h: hDir) {
+                            if(h.getHouseID().equalsIgnoreCase(houseName)) {
+
+                                if (h.getPersonDir() != null) {
+                                    populatePersons(h.getPersonDir());
+                                }
+                                else {
+                                    JOptionPane.showMessageDialog(this, "No Persons available.");
+                                    return;
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDispPersonsActionPerformed
+
+    private void btnDispHospitalsHousesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispHospitalsHousesActionPerformed
+        // TODO add your handling code here:
+
+        int selectedRowIndexCity = tblCities.getSelectedRow();
+
+        if (selectedRowIndexCity < 0 ) {
+
+            JOptionPane.showMessageDialog(this, "Please select a city.");
+            return;
+        }
+
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblCities.getModel();
+        String cityName = (String) model.getValueAt(selectedRowIndexCity, 0);
+
+        ArrayList<City> cDir = cityDir.getCityDir();
+
+        for(City c: cDir) {
+            if(c.getCityName() == (cityName)) {
+
+                int selectedRowIndex = tblCommunities.getSelectedRow();
+
+                if (selectedRowIndex < 0 ) {
+
+                    JOptionPane.showMessageDialog(this, "Please select a community.");
+                    return;
+                }
+
+                ///DefaultTableModel model;
+                model = (DefaultTableModel) tblCommunities.getModel();
+                String communityName = (String) model.getValueAt(selectedRowIndex, 0);
+
+                communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
+
+                ArrayList<Community> comDir = communityDir.getCommunityDir();
+
+                for(Community com: comDir) {
+                    if(com.getCommunityName().contains(communityName)) {
+                        System.out.println(com.getHouseDir());
+                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnDispHospitalsHousesActionPerformed
+
+    private void btnDispCommunitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispCommunitiesActionPerformed
+        // TODO add your handling code here:
+
+        int selectedRowIndex = tblCities.getSelectedRow();
+
+        if (selectedRowIndex < 0 ) {
+
+            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            return;
+        }
+
+        DefaultTableModel model;
+        model = (DefaultTableModel) tblCities.getModel();
+        String cityName = (String) model.getValueAt(selectedRowIndex, 0);
+
+        ArrayList<City> cDir = cityDir.getCityDir();
+
+        for(City c: cDir) {
+            if(c.getCityName() == (cityName)) {
+                populateCommunitiesTable(c.getCommunityDir());
+            }
+        }
+    }//GEN-LAST:event_btnDispCommunitiesActionPerformed
+
+    private void btnUpdatePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePersonActionPerformed
+
+        //Getting all the data from user input
+        fName = txtFname.getText();
+	uName = txtUname2.getText();
+	lName = txtLname2.getText();
+	age = Integer.parseInt(txtAge2.getText());
+	phone = txtPhone2.getText();
+	email = txtEmail2.getText();
+
+        //Radio buttons
+
+        if(radioMale2.isSelected() == true) {
+            gender = "Male";
+        }
+        else {
+            gender = "Female";
+        }
+
+        int selectedRowIndex = tblCities.getSelectedRow();
+
+        if (selectedRowIndex < 0 ) {
+
+            JOptionPane.showMessageDialog(this, "Please select a city.");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
+        String selectedCity = (String) model.getValueAt(selectedRowIndex, 0);
+
+        selectedRowIndex = tblCommunities.getSelectedRow();
+
+        if (selectedRowIndex < 0 ) {
+
+            JOptionPane.showMessageDialog(this, "Please select a community.");
+            return;
+        }
+
+        model = (DefaultTableModel) tblCommunities.getModel();
+        String selectedCommunity = (String) model.getValueAt(selectedRowIndex, 0);
+
+        selectedRowIndex = tblHouses.getSelectedRow();
+
+        if (selectedRowIndex < 0 ) {
+
+            JOptionPane.showMessageDialog(this, "Please select a hospital.");
+            return;
+        }
+
+        model = (DefaultTableModel) tblHouses.getModel();
+        String selectedHouse = (String) model.getValueAt(selectedRowIndex, 0);
+
+        //        selectedRowIndex = tblHouses.getSelectedRow();
+        //
+        //        if (selectedRowIndex < 0 ) {
+            //
+            //            JOptionPane.showMessageDialog(this, "Please select a hospital.");
+            //            return;
+            //        }
+        //
+        //
+        //        model = (DefaultTableModel) tblHouses.getModel();
+        //        String selectedHouse = (String) model.getValueAt(selectedRowIndex, 0);
+        //
+
+        selectedRowIndex = tblPersons.getSelectedRow();
+
+        if (selectedRowIndex < 0 ) {
+
+            JOptionPane.showMessageDialog(this, "Please select a person.");
+            return;
+        }
+
+        model = (DefaultTableModel) tblPersons.getModel();
+        String personName = (String) model.getValueAt(selectedRowIndex, 0);
+
+        //Traversing cities to find the selected city
+        ArrayList<City> cDir = cityDir.getCityDir();
+
+        for(City c: cDir) {
+            if(c.getCityName().equalsIgnoreCase(selectedCity)) {
+                CommunityDir communityDir = c.getCommunityDir();
+
+                //Traversing communities to find the selected community
+                ArrayList<Community> comDir = communityDir.getCommunityDir();
+
+                for(Community com: comDir) {
+                    if(com.getCommunityName().equalsIgnoreCase(selectedCommunity)) {
+
+                        HospitalDir hospitalDir = com.getHospitalDir();
+                        HouseDir houseDir = com.getHouseDir();
+                        
+                        //Traversing houses to find the selected house
+                                            ArrayList<House> hoDir = houseDir.getHouseDir();
+
+                                            for(House hs: hoDir) {
+                                                if(hs.getHouseID().equalsIgnoreCase(selectedHouse))
+                                                {
+
+                                                    //If personDir already present in the selected House
+                                                    if(hs.getPersonDir() != null) {
+
+                                                        PersonDir personDir = hs.getPersonDir();
+
+                                                        ArrayList<Person> pDir = personDir.getPersonDir();
+
+                                                        for(Person p: pDir) {
+
+                                                            if(p.getFname().equalsIgnoreCase(personName)) {
+
+                                                                Person person = new Person();
+
+                                                                person.setFname(fName);
+                                                                person.setAge(age);
+                                                                person.setEmail(email);
+                                                                person.setGender(gender);
+                                                                person.setLname(lName);
+                                                                person.setPhoneNumber(phone);
+
+                                                                personDir.updatePerson(p, person);
+                                                                
+                                                                populatePersons(personDir);
+                                                            }
+                                                        }
+
+                                                    }
+
+                                                    //Test
+                                                    //                                                    PersonDir personDir = hs.getPersonDir();
+                                                    //                                                    ArrayList<Person> p_temp = personDir.getPersonDir();
+                                                    //
+                                                    //                                                    for(Person p : p_temp) {
+                                                        //                                                        System.out.println("person:"+p.getFname());
+                                                        //                                                    }
+                                                }
+                                            }
+
+                                            break;
+
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_btnUpdatePersonActionPerformed
+
+    private void txtAge2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAge2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAge2ActionPerformed
+
+    private void txtUname2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUname2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUname2ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnCreatePatient;
+    private javax.swing.JButton btnCreatePatient1;
+    private javax.swing.JButton btnDispCommunities;
+    private javax.swing.JButton btnDispCommunities1;
+    private javax.swing.JButton btnDispCommunities2;
+    private javax.swing.JButton btnDispHospitalsHouses;
+    private javax.swing.JButton btnDispHospitalsHouses1;
+    private javax.swing.JButton btnDispHospitalsHouses2;
+    private javax.swing.JButton btnDispPersons;
+    private javax.swing.JButton btnUpdatePerson;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JRadioButton radioFemale;
+    private javax.swing.JRadioButton radioFemale1;
+    private javax.swing.JRadioButton radioFemale2;
+    private javax.swing.JRadioButton radioInsuredNo;
+    private javax.swing.JRadioButton radioInsuredNo1;
+    private javax.swing.JRadioButton radioInsuredYes;
+    private javax.swing.JRadioButton radioInsuredYes1;
+    private javax.swing.JRadioButton radioMale;
+    private javax.swing.JRadioButton radioMale1;
+    private javax.swing.JRadioButton radioMale2;
+    private javax.swing.JTable tblCities;
+    private javax.swing.JTable tblCities1;
+    private javax.swing.JTable tblCities2;
+    private javax.swing.JTable tblCommunities;
+    private javax.swing.JTable tblCommunities1;
+    private javax.swing.JTable tblCommunities2;
+    private javax.swing.JTable tblHospitals;
+    private javax.swing.JTable tblHospitals1;
+    private javax.swing.JTable tblHouses;
+    private javax.swing.JTable tblHouses1;
+    private javax.swing.JTable tblHouses2;
+    private javax.swing.JTable tblPersons;
+    private javax.swing.JTextField txtAge;
+    private javax.swing.JTextField txtAge1;
+    private javax.swing.JTextField txtAge2;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEmail1;
+    private javax.swing.JTextField txtEmail2;
+    private javax.swing.JTextField txtEmergencyContact;
+    private javax.swing.JTextField txtEmergencyContact1;
+    private javax.swing.JTextField txtFname;
+    private javax.swing.JTextField txtFname1;
+    private javax.swing.JTextField txtFname2;
+    private javax.swing.JTextField txtLname;
+    private javax.swing.JTextField txtLname1;
+    private javax.swing.JTextField txtLname2;
+    private javax.swing.JTextField txtPass;
+    private javax.swing.JTextField txtPass1;
+    private javax.swing.JTextField txtPhone;
+    private javax.swing.JTextField txtPhone1;
+    private javax.swing.JTextField txtPhone2;
+    private javax.swing.JTextField txtUname;
+    private javax.swing.JTextField txtUname1;
+    private javax.swing.JTextField txtUname2;
+    // End of variables declaration//GEN-END:variables
+}

@@ -611,15 +611,14 @@ public class HAModifyPanel extends javax.swing.JPanel {
 
     private void btnModifyDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyDocActionPerformed
         // TODO add your handling code here:
-        ModifyDoctorPanel s = new ModifyDoctorPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+        ModifyDoctorPanel s = new ModifyDoctorPanel(cityDir, userAuthDir, splitPane, "HospAdmin");//cityDir,uaDir);
                     
-        splitPane.setRightComponent(s);
-        
+        splitPane.setRightComponent(s);        
     }//GEN-LAST:event_btnModifyDocActionPerformed
 
     private void btnModifyPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyPatActionPerformed
         // TODO add your handling code here:
-        ModifyPatientPanel s = new ModifyPatientPanel(cityDir, userAuthDir, splitPane);//cityDir,uaDir);
+        ModifyPatientPanel s = new ModifyPatientPanel(cityDir, userAuthDir, splitPane,"HospAdmin");//cityDir,uaDir);
                     
         splitPane.setRightComponent(s);
         

@@ -42,8 +42,8 @@ public class LoginPanel extends javax.swing.JPanel {
         g1.add(radioComAd);
         g1.add(radioSysAd);
         g1.add(radioHosAd);
-        g1.add(radioPatient);
-        g1.add(radioDoctor);
+//        g1.add(radioPatient);
+//        g1.add(radioDoctor);
     }
 
     /**
@@ -64,8 +64,7 @@ public class LoginPanel extends javax.swing.JPanel {
         radioSysAd = new javax.swing.JRadioButton();
         radioComAd = new javax.swing.JRadioButton();
         radioHosAd = new javax.swing.JRadioButton();
-        radioDoctor = new javax.swing.JRadioButton();
-        radioPatient = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Username:");
 
@@ -95,9 +94,12 @@ public class LoginPanel extends javax.swing.JPanel {
 
         radioHosAd.setText("Hospital Admin");
 
-        radioDoctor.setText("Doctor");
-
-        radioPatient.setText("Patient");
+        jButton1.setText("Doctor/Patient Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,22 +114,18 @@ public class LoginPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                            .addComponent(txtUname)
+                            .addComponent(txtUname, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                             .addComponent(txtPassword)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(radioDoctor)
-                            .addComponent(radioSysAd))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(radioComAd)
-                                .addGap(30, 30, 30)
-                                .addComponent(radioHosAd))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(radioPatient)))))
+                        .addComponent(radioSysAd)
+                        .addGap(18, 18, 18)
+                        .addComponent(radioComAd)
+                        .addGap(30, 30, 30)
+                        .addComponent(radioHosAd))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(395, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -146,13 +144,11 @@ public class LoginPanel extends javax.swing.JPanel {
                     .addComponent(radioSysAd)
                     .addComponent(radioComAd)
                     .addComponent(radioHosAd))
-                .addGap(18, 18, 18)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radioDoctor)
-                    .addComponent(radioPatient))
-                .addGap(33, 33, 33)
-                .addComponent(btnLogin)
-                .addContainerGap(379, Short.MAX_VALUE))
+                    .addComponent(btnLogin)
+                    .addComponent(jButton1))
+                .addContainerGap(402, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -181,12 +177,12 @@ public class LoginPanel extends javax.swing.JPanel {
         else if(radioHosAd.isSelected() == true) {
             userType = "Hospital Admin";
         }
-        else if(radioPatient.isSelected() == true) {
-            userType = "Patient";
-        }
-        else if(radioDoctor.isSelected() == true) {
-            userType = "Doctor";
-        }                
+//        else if(radioPatient.isSelected() == true) {
+//            userType = "Patient";
+//        }
+//        else if(radioDoctor.isSelected() == true) {
+//            userType = "Doctor";
+//        }                
         
         ArrayList<UserAuth> uDir = uaDir.getUserAuthDir();
         
@@ -219,8 +215,10 @@ public class LoginPanel extends javax.swing.JPanel {
                 }
                 else if (userType.equalsIgnoreCase("Patient")) {
                     
+                    PatientPanel s = new PatientPanel(cityDir, uaDir, splitPane);//cityDir,uaDir);
                     
-                    System.out.println("Patient Login Page");
+                    splitPane.setRightComponent(s);
+                    
                     
                     
                 }
@@ -261,16 +259,23 @@ public class LoginPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        DocPatLoginPanel s = new DocPatLoginPanel(cityDir, uaDir, splitPane);//cityDir,uaDir);
+                    
+        splitPane.setRightComponent(s);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton radioComAd;
-    private javax.swing.JRadioButton radioDoctor;
     private javax.swing.JRadioButton radioHosAd;
-    private javax.swing.JRadioButton radioPatient;
     private javax.swing.JRadioButton radioSysAd;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUname;
