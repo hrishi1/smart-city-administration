@@ -6,6 +6,7 @@
 package ui;
 
 import java.util.ArrayList;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -54,6 +55,11 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         this.userAuthDir = userAuthDir;
         this.caller = caller;
         
+        ButtonGroup g1 = new ButtonGroup();
+        
+        g1.add(radioYes);
+        g1.add(radioNo);
+        
         populateCitiesTable();
     }
     
@@ -81,17 +87,16 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
         model.setRowCount(0);
         
+        if(cityDir.getCityDir() != null) {
         for(City c : cityDir.getCityDir()) {
             
             Object[] row = new Object[11];
             //row[0] = house;
             row[0] = c.getCityName();
-            row[1] = c.getState();
 
             
             model.addRow(row);
-            
-            System.out.println("PopCities Fn");
+        }
         }
     }
     
@@ -171,7 +176,6 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         btnUpdatePatient = new javax.swing.JButton();
         btnDispCommunities = new javax.swing.JButton();
         btnDispHospitalsHouses = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblPatients = new javax.swing.JTable();
         btnDispPatients = new javax.swing.JButton();
@@ -179,6 +183,9 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         radioYes = new javax.swing.JRadioButton();
         radioNo = new javax.swing.JRadioButton();
         btnBack = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel1.setText("First Name:");
 
@@ -247,8 +254,6 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel11.setText("Modify Patient");
-
         tblPatients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -288,6 +293,12 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel15.setBackground(new java.awt.Color(0, 153, 102));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel15.setText("                                Modify Patients");
+        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -295,39 +306,36 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(btnUpdatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(398, 398, 398)
-                                .addComponent(jLabel11))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(71, 71, 71)
-                                        .addComponent(btnDispCommunities)))
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnDispHospitalsHouses)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addGap(142, 142, 142)
-                                        .addComponent(btnDispPatients)
-                                        .addGap(82, 82, 82)
-                                        .addComponent(btnDeletePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(71, 71, 71)
+                                .addComponent(btnDispCommunities))
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDispHospitalsHouses)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(160, 160, 160)
+                                .addComponent(btnDispPatients)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDeletePatients, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(btnUpdatePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel8))
@@ -338,28 +346,28 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                                         .addComponent(radioYes)
                                         .addGap(18, 18, 18)
                                         .addComponent(radioNo)))))))
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addComponent(jLabel15)
+                .addGap(65, 65, 65)
+                .addComponent(btnBack)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11)
-                    .addComponent(btnBack))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDispCommunities)
                     .addComponent(btnDispHospitalsHouses)
                     .addComponent(btnDispPatients)
                     .addComponent(btnDeletePatients))
-                .addGap(104, 104, 104)
+                .addGap(89, 89, 89)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,7 +382,7 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                         .addComponent(jLabel8)))
                 .addGap(49, 49, 49)
                 .addComponent(btnUpdatePatient)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -399,9 +407,12 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         if(radioYes.isSelected() == true) {
             insured = "Yes";
         }
-        else {
+        else if(radioNo.isSelected() == true) {
             insured = "No";
         }        
+        else {
+            JOptionPane.showMessageDialog(this, "Please select patient insured!");
+        }
 
         int selectedRowIndex = tblCities.getSelectedRow();
 
@@ -526,6 +537,9 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                                                                 person.setFname(fName);
 
                                                                 personDir.updatePerson(p, person);
+                                                                
+                                                                JOptionPane.showMessageDialog(this, "Patient updated!");
+
                                                             }
                                                         }
 
@@ -619,8 +633,11 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName)) {
+            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
                 populateCommunitiesTable(c.getCommunityDir());
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Communities not available.");
             }
         }
     }//GEN-LAST:event_btnDispCommunitiesActionPerformed
@@ -662,9 +679,11 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName)) {
-                        System.out.println(com.getHouseDir());
+                    if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
                         populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Hospitals not availalble.");
                     }
                 }
             }
@@ -905,7 +924,7 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDispPatients;
     private javax.swing.JButton btnUpdatePatient;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

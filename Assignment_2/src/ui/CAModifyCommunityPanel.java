@@ -6,6 +6,7 @@
 package ui;
 
 import java.util.ArrayList;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +47,11 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
         this.userAuthDir = userAuthDir;
         this.caller = caller;
         
+        ButtonGroup g1 = new ButtonGroup();
+        
+        g1.add(radioUrban);
+        g1.add(radioRural);
+        
         populateCitiesTable();
     }
     
@@ -56,17 +62,16 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
         model.setRowCount(0);
         
+        if(cityDir.getCityDir() != null) {
         for(City c : cityDir.getCityDir()) {
             
             Object[] row = new Object[11];
             //row[0] = house;
             row[0] = c.getCityName();
             row[1] = c.getState();
-
             
             model.addRow(row);
-            
-            System.out.println("PopCities Fn");
+        }
         }
     }
     
@@ -114,6 +119,9 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         radioUrban = new javax.swing.JRadioButton();
         radioRural = new javax.swing.JRadioButton();
+        jLabel15 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 255, 204));
 
         btnModifyPanel.setText("Back to Modify Panel");
         btnModifyPanel.addActionListener(new java.awt.event.ActionListener() {
@@ -186,49 +194,60 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
 
         radioRural.setText("Rural");
 
+        jLabel15.setBackground(new java.awt.Color(0, 153, 102));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel15.setText("                                Modify Communities");
+        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(btnModifyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(502, 502, 502)
-                        .addComponent(btnDislayCom)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnDeleteCommunities, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(368, 368, 368)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnUpdateComm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtReligion, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(radioUrban)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(radioRural)))))))
+                                .addGap(11, 11, 11)
+                                .addComponent(btnModifyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(487, 487, 487)
+                                .addComponent(btnDislayCom)
+                                .addGap(54, 54, 54)
+                                .addComponent(btnDeleteCommunities, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(378, 378, 378)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnUpdateComm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtReligion, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(radioUrban)
+                                .addGap(18, 18, 18)
+                                .addComponent(radioRural)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addComponent(jLabel15)
+                .addGap(28, 28, 28)
                 .addComponent(btnModifyPanel)
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,26 +257,22 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDislayCom)
                     .addComponent(btnDeleteCommunities))
-                .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtReligion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(radioUrban)
-                            .addComponent(radioRural))
-                        .addGap(5, 5, 5)))
-                .addGap(27, 27, 27)
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtReligion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(radioUrban)
+                    .addComponent(radioRural))
+                .addGap(22, 22, 22)
                 .addComponent(btnUpdateComm)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -297,8 +312,11 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName)) {
+            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
                 populateCommunitiesTable(c.getCommunityDir());
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Communities not available.");
             }
         }
     }//GEN-LAST:event_btnDislayComActionPerformed
@@ -345,6 +363,8 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
                         
                         communityDir.deleteCommunity(com);
                         populateCommunitiesTable(communityDir);
+                        
+                        JOptionPane.showMessageDialog(this, "Community deleted!");
                         break;
                     }
                 }
@@ -386,8 +406,11 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
         if(radioUrban.isSelected() == true) {
             communityType = "Urban Community";
         }
-        else {
+        else if(radioRural.isSelected() == true){
             communityType = "Rural Community";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select a community.");
         }
 
         //Traversing city dir to get the right city object
@@ -414,7 +437,9 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
 
                             comDir.updateCommunity(com, updated_com);
                             
-                            populateCommunitiesTable(comDir);                            
+                            populateCommunitiesTable(comDir);  
+                            
+                            JOptionPane.showMessageDialog(this, "Community updated!");
                         }                        
                     }   
                 }
@@ -433,6 +458,7 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDislayCom;
     private javax.swing.JButton btnModifyPanel;
     private javax.swing.JButton btnUpdateComm;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

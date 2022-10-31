@@ -57,6 +57,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
         model.setRowCount(0);
         
+        if(cityDir.getCityDir() != null) {
         for(City c : cityDir.getCityDir()) {
             
             Object[] row = new Object[11];
@@ -65,6 +66,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
 
             
             model.addRow(row);
+        }
         }
     }
     
@@ -136,8 +138,10 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
         txtZip = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         btnModifyComm = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnModifyPerson = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 255, 204));
 
         btnDisplayHouses.setText("Display Houses");
         btnDisplayHouses.addActionListener(new java.awt.event.ActionListener() {
@@ -224,8 +228,6 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Modify Houses");
-
         btnModifyPerson.setText("Modify Person");
         btnModifyPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,32 +235,16 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel15.setBackground(new java.awt.Color(0, 153, 102));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel15.setText("                                Modify Houses");
+        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(btnDislayCom)
-                        .addGap(144, 144, 144)
-                        .addComponent(btnDisplayHouses)
-                        .addGap(71, 71, 71)
-                        .addComponent(btnDeleteHouses, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnModifyComm, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83)
-                        .addComponent(btnModifyPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(434, 434, 434)))
-                .addContainerGap(84, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,17 +264,38 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                                 .addComponent(txtHouseID)
                                 .addComponent(txtStreet)
                                 .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(436, 436, 436))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(544, 544, 544))))
+                        .addGap(436, 436, 436))))
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addComponent(btnDislayCom)
+                                .addGap(144, 144, 144)
+                                .addComponent(btnDisplayHouses)
+                                .addGap(71, 71, 71)
+                                .addComponent(btnDeleteHouses, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(btnModifyComm, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(btnModifyPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addComponent(jLabel15)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,8 +367,11 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName)) {
+                    if(com.getCommunityName().contains(communityName) && com.getHouseDir() != null) {
                         populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Houses not available.");
                     }
                 }
             }
@@ -463,8 +473,11 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName)) {
+            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
                 populateCommunitiesTable(c.getCommunityDir());
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Communities not available.");
             }
         }
     }//GEN-LAST:event_btnDislayComActionPerformed
@@ -542,6 +555,8 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                                     houseDir.updateHouse(h, house);
                                     
                                     populateHospitalsHousesTable(com.getHospitalDir(),houseDir);
+                                    
+                                    JOptionPane.showMessageDialog(this, "House updated!");
                                 }
                             }
                         }
@@ -585,10 +600,10 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDisplayHouses;
     private javax.swing.JButton btnModifyComm;
     private javax.swing.JButton btnModifyPerson;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

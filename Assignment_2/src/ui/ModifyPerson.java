@@ -140,17 +140,16 @@ public class ModifyPerson extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
         model.setRowCount(0);
         
+        if(cityDir.getCityDir() != null) {
         for(City c : cityDir.getCityDir()) {
             
             Object[] row = new Object[11];
             //row[0] = house;
             row[0] = c.getCityName();
-            row[1] = c.getState();
 
             
             model.addRow(row);
-            
-            System.out.println("PopCities Fn");
+        }
         }
     }
 

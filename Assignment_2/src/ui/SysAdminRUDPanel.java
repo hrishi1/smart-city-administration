@@ -129,7 +129,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblCities = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -156,7 +155,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         btnModifyPat = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
 
-        jLabel1.setText("Hospital Read/Update/Delete");
+        setBackground(new java.awt.Color(204, 255, 204));
 
         tblCities.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -309,13 +308,19 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                         .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnBackToSysAdmin)
-                                .addGap(199, 199, 199)
-                                .addComponent(jLabel1))
+                                .addGap(223, 223, 223)
+                                .addComponent(btnDislayCom)
+                                .addGap(144, 144, 144)
+                                .addComponent(btnDisplayHosp)
+                                .addGap(71, 71, 71)
+                                .addComponent(btnDeleteHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(48, 48, 48)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnBackToSysAdmin))
                                 .addGap(48, 48, 48)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -339,26 +344,17 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(111, 111, 111)
                                         .addComponent(btnUpdateHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(139, 139, 139)
-                                .addComponent(btnDislayCom)
-                                .addGap(144, 144, 144)
-                                .addComponent(btnDisplayHosp)
-                                .addGap(71, 71, 71)
-                                .addComponent(btnDeleteHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(69, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(118, Short.MAX_VALUE))
             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel12)
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnBackToSysAdmin))
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
+                .addComponent(btnBackToSysAdmin)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -459,6 +455,9 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                     if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
                         populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
                     }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Hospitals not available.");
+                    }
                 }       
             }
         }
@@ -481,7 +480,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
 
         if (selectedRowIndexCity < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to city.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -535,7 +534,9 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                                 
                                 hospDir.deleteHospital(h);
                                 
-                                populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                                if(com.getHospitalDir() != null) {
+                                    populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                                }
                                 break;
                                 
                                
@@ -618,7 +619,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
 
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a community.");
+            JOptionPane.showMessageDialog(this, "Please select a hospital.");
             return;
         }
 
@@ -724,7 +725,6 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnModifyHouses;
     private javax.swing.JButton btnModifyPat;
     private javax.swing.JButton btnUpdateHospital;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

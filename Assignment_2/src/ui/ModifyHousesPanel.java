@@ -57,6 +57,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
         model.setRowCount(0);
         
+        if(cityDir.getCityDir() != null) {
         for(City c : cityDir.getCityDir()) {
             
             Object[] row = new Object[11];
@@ -65,6 +66,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
 
             
             model.addRow(row);
+        }
         }
     }
     
@@ -136,6 +138,9 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
         txtStreet = new javax.swing.JTextField();
         txtZip = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(204, 255, 204));
 
         btnDisplayHouses.setText("Display Houses");
         btnDisplayHouses.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +227,12 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
 
         jLabel13.setText("Street:");
 
+        jLabel15.setBackground(new java.awt.Color(0, 153, 102));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel15.setText("                                System Admin: Modify Houses");
+        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,11 +275,13 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                         .addComponent(btnDeleteHouses, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnModifyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(84, Short.MAX_VALUE))
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addComponent(jLabel15)
+                .addGap(42, 42, 42)
                 .addComponent(btnModifyPanel)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +311,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                     .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(btnCreateHouse)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -308,7 +321,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
 
         if (selectedRowIndexCity < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to city.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -338,8 +351,11 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName)) {
+                    if(com.getCommunityName().contains(communityName) && com.getHouseDir() != null) {
                         populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this, "Houses not available.");
                     }
                 }
             }
@@ -353,7 +369,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
 
         if (selectedRowIndexCity < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to city.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -406,6 +422,8 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                                 houseDir.deleteHouse(h);
 
                                 populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                                
+                                JOptionPane.showMessageDialog(this, "House deleted!");
                                 break;
 
                                 //Test
@@ -441,8 +459,12 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName)) {
+            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
                 populateCommunitiesTable(c.getCommunityDir());
+            }
+            else {
+                JOptionPane.showMessageDialog(this, "Communities not available");
+                return;
             }
         }
     }//GEN-LAST:event_btnDislayComActionPerformed
@@ -521,6 +543,8 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                                     
                                     populateHospitalsHousesTable(com.getHospitalDir(),houseDir);
                                 }
+                                
+                                JOptionPane.showMessageDialog(this, "House updated!");
                             }
                         }
 //                        //Test
@@ -555,6 +579,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
