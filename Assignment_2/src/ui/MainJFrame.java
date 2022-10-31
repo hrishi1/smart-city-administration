@@ -22,7 +22,9 @@ import model.SystemAdmin;
 import model.Hospital;
 import model.Community;
 import model.City;
+import model.Doctor;
 import model.House;
+import model.Patient;
 import model.UserAuth;
 
 
@@ -47,6 +49,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private UserAuthDir userAuthDir;
     private SystemAdmin systemAdmin;
     private UserAuth userAuth;
+
             
     public MainJFrame() {
         initComponents();
@@ -100,7 +103,7 @@ public class MainJFrame extends javax.swing.JFrame {
         city.setCityName("Boston");
         city.setState("MA");
         city.setCommunityDir(communityDir);
-        
+       
     }
 
     /**

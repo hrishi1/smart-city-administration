@@ -10,7 +10,7 @@ import model.EncounterHistory;
  *
  * @author hrish
  */
-public class Patient {
+public class Patient extends Person {
     
     private EncounterHistory encounterHistory;
     private String insured;

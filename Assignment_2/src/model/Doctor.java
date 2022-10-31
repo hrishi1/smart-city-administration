@@ -18,6 +18,15 @@ public class Doctor {
     private int yearsOfExperience;
     private String name;
     private String houseID;
+    private AppointmentDir appDir;
+
+    public AppointmentDir getAppDir() {
+        return appDir;
+    }
+
+    public void setAppDir(AppointmentDir appDir) {
+        this.appDir = appDir;
+    }
 
     public String getHouseID() {
         return houseID;

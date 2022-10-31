@@ -10,6 +10,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
+import model.Appointment;
+import model.AppointmentDir;
 import model.City;
 import model.CityDir;
 import model.Community;
@@ -33,6 +35,11 @@ public class PatientPanel extends javax.swing.JPanel {
     private CityDir cityDir;
     private UserAuthDir userAuthDir;
     private CommunityDir communityDir;
+    private String cityName;
+    private String commName;
+    private String hospName;
+    private String docName;
+    private String patName;
 
     /**
      * Creates new form PatientPanel
@@ -41,14 +48,19 @@ public class PatientPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public PatientPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane) {
+    public PatientPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane, String cityName, String commName, String hospName, String patName) {
         initComponents();
         
         this.splitPane = splitPane;
         this.cityDir = cityDir;
         this.userAuthDir = userAuthDir;
+        this.cityName = cityName;
+        this.commName = commName;
+        this.hospName = hospName;
+        this.docName = docName;
+        this.patName = patName;
         
-        populateCitiesTable();
+        populatePatientTable();
     }
     
     private void populatePatients(PatientDir patDir) {
@@ -68,66 +80,32 @@ public class PatientPanel extends javax.swing.JPanel {
         } 
     }
     
-    private void populatePatientsTable(String patientName) {
+    private void populatePatientTable() {                                                   
         // TODO add your handling code here:
-
-        int selectedRowIndexCity = tblCities.getSelectedRow();
-
-        if (selectedRowIndexCity < 0 ) {
-
-            JOptionPane.showMessageDialog(this, "Please select a city.");
-            return;
-        }
-
-        DefaultTableModel model;
-        model = (DefaultTableModel) tblCities.getModel();
-        String cityName = (String) model.getValueAt(selectedRowIndexCity, 0);
+        
+                                                       
+        // TODO add your handling code here:
 
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
             if(c.getCityName().equalsIgnoreCase(cityName)) {
-
-                int selectedRowIndex = tblCommunities.getSelectedRow();
-
-                if (selectedRowIndex < 0 ) {
-
-                    JOptionPane.showMessageDialog(this, "Please select a community.");
-                    return;
-                }
-
-                ///DefaultTableModel model;
-                model = (DefaultTableModel) tblCommunities.getModel();
-                String communityName = (String) model.getValueAt(selectedRowIndex, 0);
-
-                selectedRowIndex = tblHospitals.getSelectedRow();
-
-                if (selectedRowIndex < 0 ) {
-
-                    JOptionPane.showMessageDialog(this, "Please select a Hospital.");
-                    return;
-                }
-
-                ///DefaultTableModel model;
-                model = (DefaultTableModel) tblHospitals.getModel();
-                String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
-
                 communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
 
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().equalsIgnoreCase(communityName)) {
-
+                    if(com.getCommunityName().equalsIgnoreCase(commName)) {
+                        
                         HospitalDir hospitalDir = com.getHospitalDir();
                         ArrayList<Hospital> hospDir = hospitalDir.getHospitalDir();
 
                         for(Hospital h: hospDir) {
-                            if(h.getHospitalName().equalsIgnoreCase(hospitalName)) {
-
+                            if(h.getHospitalName().equalsIgnoreCase(hospName)) {                               
+                                
                                 if (h.getPatientDir() != null) {
                                     populatePatients(h.getPatientDir());
-                                }
+                                } 
                                 else {
                                     JOptionPane.showMessageDialog(this, "No Patients available.");
                                     return;
@@ -138,8 +116,7 @@ public class PatientPanel extends javax.swing.JPanel {
                 }
             }
         }
-
-    }            
+    }               
     
     private void populateHospitalsHousesTable(HospitalDir hospitalDir, HouseDir houseDir) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -175,25 +152,7 @@ public class PatientPanel extends javax.swing.JPanel {
         } 
     }
     
-    private void populateCommunitiesTable(CommunityDir communityDir) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-        DefaultTableModel model = (DefaultTableModel) tblCommunities.getModel();
-        model.setRowCount(0);
-        
-        for(Community c : communityDir.getCommunityDir()) {
-            
-            Object[] row = new Object[11];
-            //row[0] = house;
-            row[0] = c.getCommunityName();
-            row[1] = c.getMajorityReligion();
-            row[2] = c.getCommunityType();
 
-            
-            model.addRow(row);
-            
-        }                
-    }
     
     private void populateDoctors(DoctorDir doctorDir) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -213,26 +172,6 @@ public class PatientPanel extends javax.swing.JPanel {
         } 
     }
     
-    private void populateCitiesTable() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-        // House Table        
-        DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
-        model.setRowCount(0);
-        
-        for(City c : cityDir.getCityDir()) {
-            
-            Object[] row = new Object[11];
-            //row[0] = house;
-            row[0] = c.getCityName();
-            row[1] = c.getState();
-
-            
-            model.addRow(row);
-            
-            System.out.println("PopCities Fn");
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -243,46 +182,17 @@ public class PatientPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblCities = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblCommunities = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHospitals = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDoctors = new javax.swing.JTable();
-        btnDispCommunities = new javax.swing.JButton();
         btnDispHospitalsHouses = new javax.swing.JButton();
         btnDispDoctors = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-
-        tblCities.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Cities"
-            }
-        ));
-        jScrollPane4.setViewportView(tblCities);
-
-        tblCommunities.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Communities"
-            }
-        ));
-        jScrollPane3.setViewportView(tblCommunities);
+        btnBookApp = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblPatients = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tblDoctors1 = new javax.swing.JTable();
 
         tblHospitals.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -307,17 +217,10 @@ public class PatientPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "First Name", "Qualification", "Specialization"
+                "Encounter", "Qualification", "Specialization"
             }
         ));
         jScrollPane2.setViewportView(tblDoctors);
-
-        btnDispCommunities.setText("Display Communities");
-        btnDispCommunities.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDispCommunitiesActionPerformed(evt);
-            }
-        });
 
         btnDispHospitalsHouses.setText("Display Hospitals");
         btnDispHospitalsHouses.addActionListener(new java.awt.event.ActionListener() {
@@ -333,118 +236,103 @@ public class PatientPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Book Appointment");
+        btnBookApp.setText("Book Appointment");
+        btnBookApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookAppActionPerformed(evt);
+            }
+        });
+
+        tblPatients.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Patient Name", "Insured"
+            }
+        ));
+        jScrollPane5.setViewportView(tblPatients);
+
+        tblDoctors1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "First Name", "Qualification", "Specialization"
+            }
+        ));
+        jScrollPane6.setViewportView(tblDoctors1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(btnDispCommunities))
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(79, 79, 79)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDispHospitalsHouses)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnDispHospitalsHouses)
+                        .addGap(148, 148, 148)
                         .addComponent(btnDispDoctors)
-                        .addGap(53, 53, 53)
-                        .addComponent(jButton1)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                        .addGap(71, 71, 71)
+                        .addComponent(btnBookApp)))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(297, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDispCommunities)
-                    .addComponent(btnDispHospitalsHouses)
                     .addComponent(btnDispDoctors)
-                    .addComponent(jButton1))
-                .addGap(411, 411, 411))
+                    .addComponent(btnBookApp)
+                    .addComponent(btnDispHospitalsHouses))
+                .addGap(446, 446, 446))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnDispCommunitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispCommunitiesActionPerformed
-        // TODO add your handling code here:
-
-        int selectedRowIndex = tblCities.getSelectedRow();
-
-        if (selectedRowIndex < 0 ) {
-
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
-            return;
-        }
-
-        DefaultTableModel model;
-        model = (DefaultTableModel) tblCities.getModel();
-        String cityName = (String) model.getValueAt(selectedRowIndex, 0);
-
-        ArrayList<City> cDir = cityDir.getCityDir();
-
-        for(City c: cDir) {
-            if(c.getCityName() == (cityName)) {
-                populateCommunitiesTable(c.getCommunityDir());
-            }
-        }
-    }//GEN-LAST:event_btnDispCommunitiesActionPerformed
 
     private void btnDispHospitalsHousesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispHospitalsHousesActionPerformed
         // TODO add your handling code here:
 
-        int selectedRowIndexCity = tblCities.getSelectedRow();
-
-        if (selectedRowIndexCity < 0 ) {
-
-            JOptionPane.showMessageDialog(this, "Please select a city.");
-            return;
-        }
-
-        DefaultTableModel model;
-        model = (DefaultTableModel) tblCities.getModel();
-        String cityName = (String) model.getValueAt(selectedRowIndexCity, 0);
-
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
             if(c.getCityName() == (cityName)) {
 
-                int selectedRowIndex = tblCommunities.getSelectedRow();
-
-                if (selectedRowIndex < 0 ) {
-
-                    JOptionPane.showMessageDialog(this, "Please select a community.");
-                    return;
-                }
-
-                ///DefaultTableModel model;
-                model = (DefaultTableModel) tblCommunities.getModel();
-                String communityName = (String) model.getValueAt(selectedRowIndex, 0);
+                
 
                 communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
 
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName)) {
+                    if(com.getCommunityName().contains(commName)) {
                         populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
                     }
                 }
@@ -455,45 +343,21 @@ public class PatientPanel extends javax.swing.JPanel {
     private void btnDispDoctorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispDoctorsActionPerformed
         // TODO add your handling code here:
 
-        int selectedRowIndexCity = tblCities.getSelectedRow();
-
-        if (selectedRowIndexCity < 0 ) {
-
-            JOptionPane.showMessageDialog(this, "Please select a city.");
-            return;
-        }
-
-        DefaultTableModel model;
-        model = (DefaultTableModel) tblCities.getModel();
-        String cityName = (String) model.getValueAt(selectedRowIndexCity, 0);
-
+        
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
             if(c.getCityName().equalsIgnoreCase(cityName)) {
 
-                int selectedRowIndex = tblCommunities.getSelectedRow();
+                int selectedRowIndex = tblHospitals.getSelectedRow();
 
                 if (selectedRowIndex < 0 ) {
 
-                    JOptionPane.showMessageDialog(this, "Please select a community.");
+                    JOptionPane.showMessageDialog(this, "Please select a hospital.");
                     return;
                 }
-
-                ///DefaultTableModel model;
-                model = (DefaultTableModel) tblCommunities.getModel();
-                String communityName = (String) model.getValueAt(selectedRowIndex, 0);
-
-                selectedRowIndex = tblHospitals.getSelectedRow();
-
-                if (selectedRowIndex < 0 ) {
-
-                    JOptionPane.showMessageDialog(this, "Please select a community.");
-                    return;
-                }
-
-                ///DefaultTableModel model;
-                model = (DefaultTableModel) tblHospitals.getModel();
+                
+                DefaultTableModel model = (DefaultTableModel) tblHospitals.getModel();
                 String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
 
                 communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
@@ -501,7 +365,7 @@ public class PatientPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().equalsIgnoreCase(communityName)) {
+                    if(com.getCommunityName().equalsIgnoreCase(commName)) {
 
                         HospitalDir hospitalDir = com.getHospitalDir();
                         ArrayList<Hospital> hospDir = hospitalDir.getHospitalDir();
@@ -525,19 +389,106 @@ public class PatientPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnDispDoctorsActionPerformed
 
+    private void btnBookAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookAppActionPerformed
+        // TODO add your handling code here:
+        
+        ArrayList<City> cDir = cityDir.getCityDir();
+
+        for(City c: cDir) {
+            if(c.getCityName().equalsIgnoreCase(cityName)) {
+
+                int selectedRowIndex = tblHospitals.getSelectedRow();
+
+                if (selectedRowIndex < 0 ) {
+
+                    JOptionPane.showMessageDialog(this, "Please select a hospital.");
+                    return;
+                }
+                
+                DefaultTableModel model = (DefaultTableModel) tblHospitals.getModel();
+                String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
+                
+                selectedRowIndex = tblDoctors.getSelectedRow();
+
+                if (selectedRowIndex < 0 ) {
+
+                    JOptionPane.showMessageDialog(this, "Please select a doctor.");
+                    return;
+                }
+                
+                model = (DefaultTableModel) tblDoctors.getModel();
+                String doctorName = (String) model.getValueAt(selectedRowIndex, 0);
+
+                communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
+
+                ArrayList<Community> comDir = communityDir.getCommunityDir();
+
+                for(Community com: comDir) {
+                    if(com.getCommunityName().equalsIgnoreCase(commName)) {
+
+                        HospitalDir hospitalDir = com.getHospitalDir();
+                        ArrayList<Hospital> hospDir = hospitalDir.getHospitalDir();
+
+                        for(Hospital h: hospDir) {
+                            if(h.getHospitalName().equalsIgnoreCase(hospitalName)) {
+
+                                if (h.getDoctorDir() != null) {
+                                    
+                                    DoctorDir doctorDir = h.getDoctorDir();
+                                    ArrayList<Doctor> docDir = doctorDir.getDoctorDir();
+                                    
+                                    for(Doctor d: docDir) {
+                                        
+                                        if(d.getName() == doctorName) {
+                                            
+                                            if(d.getAppDir() != null) {
+                                                
+                                                AppointmentDir appDir = d.getAppDir();
+                                                
+                                                Appointment app = appDir.addNewAppointment();
+                                                
+                                                app.setDoctorName(doctorName);
+                                                app.setHospitalName(hospitalName);
+                                                app.setPatientName(patName);
+                                            }
+                                            else {
+                                                
+                                                AppointmentDir appDir = new AppointmentDir();
+                                                
+                                                Appointment app = appDir.addNewAppointment();
+                                                app.setDoctorName(doctorName);
+                                                app.setHospitalName(hospitalName);
+                                                app.setPatientName(patName);
+                                                
+                                                d.setAppDir(appDir);
+                                            }
+                                        }   
+                                    }
+                                }
+                                else {
+                                    JOptionPane.showMessageDialog(this, "No Doctors available.");
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_btnBookAppActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDispCommunities;
+    private javax.swing.JButton btnBookApp;
     private javax.swing.JButton btnDispDoctors;
     private javax.swing.JButton btnDispHospitalsHouses;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable tblCities;
-    private javax.swing.JTable tblCommunities;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable tblDoctors;
+    private javax.swing.JTable tblDoctors1;
     private javax.swing.JTable tblHospitals;
+    private javax.swing.JTable tblPatients;
     // End of variables declaration//GEN-END:variables
 }
