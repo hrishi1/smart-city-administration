@@ -78,7 +78,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
         if (selectedRowIndexCity < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a city3.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -223,7 +223,9 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
         model.setRowCount(0);
         
-        for(City c : cityDir.getCityDir()) {
+        if(cityDir.getCityDir() != null) {
+        
+            for(City c : cityDir.getCityDir()) {
             
             Object[] row = new Object[11];
             //row[0] = house;
@@ -232,6 +234,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
             
             model.addRow(row);
+        }
             
         }
     }
@@ -266,6 +269,9 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUname = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         tblCities.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -391,6 +397,11 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel12.setText("                                     Doctor/Patient Login");
+        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -444,11 +455,13 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
                                     .addGap(76, 76, 76)
                                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(379, Short.MAX_VALUE))
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addComponent(jLabel12)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -486,18 +499,18 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
         DefaultTableModel model;
         model = (DefaultTableModel) tblCities.getModel();
         String cityName = (String) model.getValueAt(selectedRowIndex, 0);
-
+        
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName)) {
+            if(c.getCityName().equalsIgnoreCase(cityName) && c.getCommunityDir() != null) {
                 populateCommunitiesTable(c.getCommunityDir());
             }
         }
@@ -510,7 +523,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
         if (selectedRowIndexCity < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a city4.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -540,7 +553,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName)) {
+                    if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
                         populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
                     }
                 }
@@ -555,7 +568,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
         if (selectedRowIndexCity < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a city5.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -630,7 +643,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
         if (selectedRowIndexCity < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a city1.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -702,7 +715,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
         if (selectedRowIndex < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a city2.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -732,6 +745,29 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
         model = (DefaultTableModel) tblHospitals.getModel();
         String hospName = (String) model.getValueAt(selectedRowIndex, 0);
+        
+//        selectedRowIndex = tblDoctors.getSelectedRow();
+//
+//        if (selectedRowIndex < 0 ) {
+//
+//            JOptionPane.showMessageDialog(this, "Please select a doctor.");
+//            return;
+//        }
+//
+//        model = (DefaultTableModel) tblDoctors.getModel();
+//        String docName = (String) model.getValueAt(selectedRowIndex, 0);
+//        
+//        
+//        selectedRowIndex = tblPatients.getSelectedRow();
+//
+//        if (selectedRowIndex < 0 ) {
+//
+//            JOptionPane.showMessageDialog(this, "Please select a patient.");
+//            return;
+//        }
+//
+//        model = (DefaultTableModel) tblPatients.getModel();
+//        String patName = (String) model.getValueAt(selectedRowIndex, 0);
   
         uname = txtUname.getText();
         password = txtPassword.getText();        
@@ -745,6 +781,10 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
                 else if(radioDoctor.isSelected() == true) {
                         userType = "Doctor";
                     }
+                else {
+                    JOptionPane.showMessageDialog(this, "Please select user type.");
+                    return;
+                }
 
         ArrayList<UserAuth> uDir = userAuthDir.getUserAuthDir();
 
@@ -782,6 +822,10 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
 
                     model = (DefaultTableModel) tblDoctors.getModel();
                     String docName = (String) model.getValueAt(selectedRowIndex, 0);
+                    
+                    DoctorPanel s = new DoctorPanel(cityDir, userAuthDir, splitPane, cityName, commName, hospName, docName);//cityDir,uaDir);
+
+                    splitPane.setRightComponent(s);
 
                 }
                 
@@ -828,6 +872,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDisplayPatients;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

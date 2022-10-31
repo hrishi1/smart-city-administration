@@ -10,7 +10,7 @@ import model.VitalSigns;
  *
  * @author hrish
  */
-public class Encounter {
+public class Encounter extends VitalSigns{
     
     private VitalSigns v;
     private String hospitalName;

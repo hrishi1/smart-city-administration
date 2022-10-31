@@ -65,6 +65,9 @@ public class LoginPanel extends javax.swing.JPanel {
         radioComAd = new javax.swing.JRadioButton();
         radioHosAd = new javax.swing.JRadioButton();
         btnDocPatLogin = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setText("Username:");
 
@@ -101,6 +104,11 @@ public class LoginPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel12.setText("                                       Admin Login");
+        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -127,11 +135,13 @@ public class LoginPanel extends javax.swing.JPanel {
                         .addGap(59, 59, 59)
                         .addComponent(btnDocPatLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(395, Short.MAX_VALUE))
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
+                .addComponent(jLabel12)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtUname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,6 +186,10 @@ public class LoginPanel extends javax.swing.JPanel {
         }        
         else if(radioHosAd.isSelected() == true) {
             userType = "Hospital Admin";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select user type.");
+            return;
         }
 //        else if(radioPatient.isSelected() == true) {
 //            userType = "Patient";
@@ -269,6 +283,7 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnLogin;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JRadioButton radioComAd;
     private javax.swing.JRadioButton radioHosAd;

@@ -190,11 +190,13 @@ public class SySAdminPanel extends javax.swing.JPanel {
         btnCreateDoctor = new javax.swing.JButton();
         btnDispCommunities = new javax.swing.JButton();
         btnDispHospitalsHouses = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
         txtSpecialization = new javax.swing.JTextField();
         btnCreateAdmins = new javax.swing.JButton();
         btnCreateOther = new javax.swing.JButton();
         btnRUD = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+
+        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
         txtAge.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +239,15 @@ public class SySAdminPanel extends javax.swing.JPanel {
             new String [] {
                 "Hospital(s)"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblHospitals);
 
         tblHouses.setModel(new javax.swing.table.DefaultTableModel(
@@ -251,7 +261,15 @@ public class SySAdminPanel extends javax.swing.JPanel {
             new String [] {
                 "House(s)"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblHouses);
 
         tblCommunities.setModel(new javax.swing.table.DefaultTableModel(
@@ -265,7 +283,15 @@ public class SySAdminPanel extends javax.swing.JPanel {
             new String [] {
                 "Communities"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tblCommunities);
 
         tblCities.setModel(new javax.swing.table.DefaultTableModel(
@@ -279,7 +305,15 @@ public class SySAdminPanel extends javax.swing.JPanel {
             new String [] {
                 "Cities"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(tblCities);
 
         btnCreateDoctor.setText("Create Doctor");
@@ -303,113 +337,109 @@ public class SySAdminPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel11.setText("Create Doctor");
-
-        btnCreateAdmins.setText("Create Admins");
+        btnCreateAdmins.setText("Go To Create Admins");
         btnCreateAdmins.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateAdminsActionPerformed(evt);
             }
         });
 
-        btnCreateOther.setText("Create Other Resources");
+        btnCreateOther.setText("Go To Create Other Resources");
         btnCreateOther.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateOtherActionPerformed(evt);
             }
         });
 
-        btnRUD.setText("Modify Resources");
+        btnRUD.setText("Go To Modify Resources");
         btnRUD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRUDActionPerformed(evt);
             }
         });
 
+        jLabel12.setBackground(new java.awt.Color(0, 153, 102));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel12.setText("                                System Admin: Create Doctor");
+        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(202, 202, 202)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(btnDispCommunities)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDispHospitalsHouses)
+                        .addGap(253, 253, 253))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(49, 49, 49)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFname)
-                                    .addComponent(txtLname)
-                                    .addComponent(txtUname)
-                                    .addComponent(txtPass)
-                                    .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(83, 83, 83)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(131, 131, 131)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFname)
+                            .addComponent(txtLname)
+                            .addComponent(txtUname)
+                            .addComponent(txtPass)
+                            .addComponent(txtAge, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+                        .addGap(144, 144, 144)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtQualification, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtSpecialization))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(radioMale)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(radioFemale)))
-                                .addGap(94, 94, 94))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(106, 106, 106))))
+                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtQualification, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSpecialization))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(radioMale)
+                                .addGap(18, 18, 18)
+                                .addComponent(radioFemale)))
+                        .addGap(94, 94, 94))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(btnCreateOther)
-                        .addGap(86, 86, 86)
-                        .addComponent(btnRUD)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
-                        .addComponent(jLabel11))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(358, 358, 358)
-                        .addComponent(btnDispCommunities)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDispHospitalsHouses)))
-                .addGap(139, 139, 139))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnCreateDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(359, 359, 359))
+                .addGap(435, 435, 435))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(144, 144, 144)
+                .addGap(172, 172, 172)
                 .addComponent(btnCreateAdmins)
+                .addGap(48, 48, 48)
+                .addComponent(btnCreateOther)
+                .addGap(44, 44, 44)
+                .addComponent(btnRUD)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addGap(28, 28, 28)
+                .addComponent(jLabel12)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -450,7 +480,7 @@ public class SySAdminPanel extends javax.swing.JPanel {
                     .addComponent(radioFemale)
                     .addComponent(jLabel5)
                     .addComponent(jLabel10))
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -460,14 +490,14 @@ public class SySAdminPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDispCommunities)
                     .addComponent(btnDispHospitalsHouses))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(btnCreateDoctor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreateAdmins)
                     .addComponent(btnCreateOther)
                     .addComponent(btnRUD))
-                .addGap(151, 151, 151))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -560,8 +590,12 @@ public class SySAdminPanel extends javax.swing.JPanel {
         if(radioMale.isSelected() == true) {
             gender = "Male";
         }
-        else {
+        else if(radioFemale.isSelected() == true){
             gender = "Female";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select a gender.");
+            return;
         }
 
         model = (DefaultTableModel) tblHospitals.getModel();
@@ -796,7 +830,7 @@ public class SySAdminPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRUD;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

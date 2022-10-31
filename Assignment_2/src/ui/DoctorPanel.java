@@ -9,14 +9,21 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
+import model.Appointment;
+import model.AppointmentDir;
 import model.City;
 import model.CityDir;
 import model.Community;
+import model.CommunityDir;
 import model.Doctor;
 import model.DoctorDir;
+import model.Encounter;
+import model.EncounterHistory;
 import model.Hospital;
 import model.HospitalDir;
 import model.HouseDir;
+import model.Patient;
+import model.PatientDir;
 import model.UserAuthDir;
 
 /**
@@ -33,6 +40,7 @@ public class DoctorPanel extends javax.swing.JPanel {
     private String patName;
     private String docName;
     private UserAuthDir userAuthDir;
+    private CommunityDir communityDir;
 
     /**
      * Creates new form DoctorPanel
@@ -41,7 +49,7 @@ public class DoctorPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public DoctorPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane, String cityName, String commName, String hospName, String patName) {
+    public DoctorPanel(CityDir cityDir, UserAuthDir userAuthDir, JSplitPane splitPane, String cityName, String commName, String hospName, String docName) {
         initComponents();
         
         this.splitPane = splitPane;
@@ -51,70 +59,72 @@ public class DoctorPanel extends javax.swing.JPanel {
         this.commName = commName;
         this.hospName = hospName;
         this.docName = docName;
-        this.patName = patName;
+        //this.patName = patName;
         
         populateDoctorsTable();
+        populateAppointmentTable();
+        populateEncountersTable();
     }
     
-    private void btnDispHospitalsHousesActionPerformed(java.awt.event.ActionEvent evt) {                                                       
-        // TODO add your handling code here:
-
+    private void populateEncounters(EncounterHistory encHist) {
+        
+        DefaultTableModel model = (DefaultTableModel) tblEncounters.getModel();
+        model.setRowCount(0);
+        
+        
+        ArrayList<Encounter> aDir = encHist.getEncounterHistory();
+        
+        for(Encounter a: aDir) {
+            Object[] row = new Object[11];
+            row[0] = a.getPatientName();
+            row[1] = a.getEncounterType();
+            row[2] = a.getDisease();
+            row[3] = a.getV().getBodyTemperature();
+            row[4] = a.getV().getPulseRate();
+            row[5] = a.getV().getBloodPressure();
+            
+            
+            model.addRow(row);
+        }   
+    }
+    
+    private void populateEncountersTable() {
+    
         ArrayList<City> cDir = cityDir.getCityDir();
-
-        for(City c: cDir) {
-            if(c.getCityName() == (cityName)) {
-
-                
-
-                communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
-
-                ArrayList<Community> comDir = communityDir.getCommunityDir();
-
-                for(Community com: comDir) {
-                    if(com.getCommunityName().contains(commName)) {
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
-                    }
-                }
-            }
-        }
-    }                                                      
-
-    private void btnDispDoctorsActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
 
         
-        ArrayList<City> cDir = cityDir.getCityDir();
-
         for(City c: cDir) {
             if(c.getCityName().equalsIgnoreCase(cityName)) {
-
-                int selectedRowIndex = tblHospitals.getSelectedRow();
-
-                if (selectedRowIndex < 0 ) {
-
-                    JOptionPane.showMessageDialog(this, "Please select a hospital.");
-                    return;
-                }
-                
-                DefaultTableModel model = (DefaultTableModel) tblHospitals.getModel();
-                String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
-
                 communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
 
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
                     if(com.getCommunityName().equalsIgnoreCase(commName)) {
-
+                       
                         HospitalDir hospitalDir = com.getHospitalDir();
                         ArrayList<Hospital> hospDir = hospitalDir.getHospitalDir();
 
                         for(Hospital h: hospDir) {
-                            if(h.getHospitalName().equalsIgnoreCase(hospitalName)) {
+                            if(h.getHospitalName().equalsIgnoreCase(hospName)) {                               
 
                                 if (h.getDoctorDir() != null) {
-                                    populateDoctors(h.getDoctorDir());
-                                }
+                                    
+                                    //populateDoctors(h.getDoctorDir());
+                                    DoctorDir docDir = h.getDoctorDir();
+                                    ArrayList<Doctor> pDir = docDir.getDoctorDir();
+          
+                                    for(Doctor p: pDir) {
+                                        if(p.getName() == docName) {
+                                            
+                                            
+                                            if (p.getEncounterHistory() != null) {
+                                                populateEncounters(p.getEncounterHistory());
+                                            }
+                                        }
+                                    }
+                                    
+                                } 
                                 else {
                                     JOptionPane.showMessageDialog(this, "No Doctors available.");
                                     return;
@@ -125,42 +135,133 @@ public class DoctorPanel extends javax.swing.JPanel {
                 }
             }
         }
-
-    }       
+        
+    }
     
-    private void populateHospitalsHousesTable(HospitalDir hospitalDir, HouseDir houseDir) {
+    private void populateAppointments(AppointmentDir appDir) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
-        DefaultTableModel model = (DefaultTableModel) tblHospitals.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblAppointment.getModel();
         model.setRowCount(0);
         
-        for(Hospital c : hospitalDir.getHospitalDir()) {
+        
+        ArrayList<Appointment> aDir = appDir.getAppointmentDir();
+        
+        for(Appointment a: aDir) {
+            Object[] row = new Object[11];
+            row[0] = a.getPatientName();
+            row[1] = a.getHospitalName();
+            
+            model.addRow(row);
+        }
+    }
+    
+    private void populateAppointmentTable() {
+        ArrayList<City> cDir = cityDir.getCityDir();
+
+        
+        for(City c: cDir) {
+            if(c.getCityName().equalsIgnoreCase(cityName)) {
+                communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
+
+                ArrayList<Community> comDir = communityDir.getCommunityDir();
+
+                for(Community com: comDir) {
+                    if(com.getCommunityName().equalsIgnoreCase(commName)) {
+                       
+                        
+                        HospitalDir hospitalDir = com.getHospitalDir();
+                        ArrayList<Hospital> hospDir = hospitalDir.getHospitalDir();
+
+                        for(Hospital h: hospDir) {
+                            if(h.getHospitalName().equalsIgnoreCase(hospName)) {                               
+                                
+                                if (h.getDoctorDir() != null) {
+                                    
+                                    //populateDoctors(h.getDoctorDir());
+                                    DoctorDir docDir = h.getDoctorDir();
+                                    ArrayList<Doctor> pDir = docDir.getDoctorDir();
+          
+                                    for(Doctor p: pDir) {
+                                        if(p.getName().equalsIgnoreCase(docName) && p.getAppDir() != null) {
+                                            populateAppointments(p.getAppDir());
+                                        }
+                                    }
+                                    
+                                } 
+//                                else {
+//                                    JOptionPane.showMessageDialog(this, "No Doctors available.");
+//                                    return;
+//                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private void populateDoctors(Doctor doc) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        DefaultTableModel model = (DefaultTableModel) tblDoctors.getModel();
+        model.setRowCount(0);
             
             Object[] row = new Object[11];
-            //row[0] = house;
-            row[0] = c.getHospitalName();
-            row[1] = c.getRating();
-            row[2] = c.getHospitalType();
-
+            row[0] = doc.getName();
+            row[1] = doc.getQualification();
+            row[2] = doc.getSpecialization();
             
             model.addRow(row);
             
-//        model = (DefaultTableModel) tblHouses.getModel();
-//        model.setRowCount(0);
-//        
-//        for(House h : houseDir.getHouseDir()) {
-//            
-//            row = new Object[11];
-//            //row[0] = house;
-//            row[0] = h.getHouseID();
-//
-//            
-//            model.addRow(row);
-            
-//        } 
-            
-        } 
+        
     }
+
+    private void populateDoctorsTable() {
+        
+        // TODO add your handling code here:
+
+        ArrayList<City> cDir = cityDir.getCityDir();
+
+        for(City c: cDir) {
+            if(c.getCityName().equalsIgnoreCase(cityName)) {
+                communityDir = c.getCommunityDir(); // communityDir.getCommunityDir();
+
+                ArrayList<Community> comDir = communityDir.getCommunityDir();
+
+                for(Community com: comDir) {
+                    if(com.getCommunityName().equalsIgnoreCase(commName)) {
+                        
+                        HospitalDir hospitalDir = com.getHospitalDir();
+                        ArrayList<Hospital> hospDir = hospitalDir.getHospitalDir();
+
+                        for(Hospital h: hospDir) {
+                            if(h.getHospitalName().equalsIgnoreCase(hospName)) {                               
+                                
+                                if (h.getDoctorDir() != null) {
+                                    //populateDoctors(h.getDoctorDir());
+                                    DoctorDir patDir = h.getDoctorDir();
+                                    ArrayList<Doctor> pDir = patDir.getDoctorDir();
+                                    for(Doctor p: pDir) {
+                                        if(p.getName() == docName) {
+                                            populateDoctors(p);
+                                        }
+                                    }
+                                    
+                                } 
+                                else {
+                                    JOptionPane.showMessageDialog(this, "No Doctors available.");
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }       
+    
+    
     
 
     
@@ -193,14 +294,21 @@ public class DoctorPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane6 = new javax.swing.JScrollPane();
-        tblDoctors1 = new javax.swing.JTable();
+        tblDoctors = new javax.swing.JTable();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblAppointment = new javax.swing.JTable();
         btnStartAppointment = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEncounters = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
-        tblDoctors1.setModel(new javax.swing.table.DefaultTableModel(
+        setBackground(new java.awt.Color(204, 255, 255));
+        setPreferredSize(new java.awt.Dimension(1200, 722));
+
+        tblDoctors.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -211,11 +319,16 @@ public class DoctorPanel extends javax.swing.JPanel {
             new String [] {
                 "Doctor Name", "Qualification", "Specialization"
             }
-        ));
-        jScrollPane6.setViewportView(tblDoctors1);
-        if (tblDoctors1.getColumnModel().getColumnCount() > 0) {
-            tblDoctors1.getColumnModel().getColumn(2).setHeaderValue("Specialization");
-        }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tblDoctors);
 
         tblAppointment.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -228,7 +341,15 @@ public class DoctorPanel extends javax.swing.JPanel {
             new String [] {
                 "Patient Name", "Hospital"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane7.setViewportView(tblAppointment);
 
         btnStartAppointment.setText("Start Appointment");
@@ -238,64 +359,118 @@ public class DoctorPanel extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEncounters.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Encounter", "Title 2", "Title 3", "Title 4"
+                "Patient Name", "Encounter Type", "Disease", "Temperature", "Pulse", "Blood Pressure"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblEncounters);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setText("                                          Doctor Portal");
+        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel2.setText("Appointments:");
+
+        jLabel3.setText("Doctor Details:");
+
+        jLabel4.setText("Encounter History:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnStartAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(667, 667, 667))
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnStartAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(420, 420, 420))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(527, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addComponent(jLabel1)
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnStartAppointment)
-                .addGap(60, 60, 60)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(298, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartAppointmentActionPerformed
         // TODO add your handling code here:
+        
+        int selectedRowIndex = tblAppointment.getSelectedRow();
+
+                if (selectedRowIndex < 0 ) {
+
+                    JOptionPane.showMessageDialog(this, "Please select an appointment.");
+                    return;
+                }
+                
+                DefaultTableModel model = (DefaultTableModel) tblAppointment.getModel();
+                String patientName = (String) model.getValueAt(selectedRowIndex, 0);
+                
+                StartAppPanel s = new StartAppPanel(cityDir, userAuthDir, splitPane, cityName, commName, hospName, docName, patientName);//cityDir,uaDir);
+
+                    splitPane.setRightComponent(s);
+        
     }//GEN-LAST:event_btnStartAppointmentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStartAppointment;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable tblAppointment;
-    private javax.swing.JTable tblDoctors1;
+    private javax.swing.JTable tblDoctors;
+    private javax.swing.JTable tblEncounters;
     // End of variables declaration//GEN-END:variables
 }

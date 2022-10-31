@@ -48,6 +48,17 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         this.cityDir = cityDir;
         this.userAuthDir = userAuthDir;
         
+        ButtonGroup g1 = new ButtonGroup();
+        
+        g1.add(radioCommunity);
+        g1.add(radioPrivate);
+        
+        ButtonGroup g2 = new ButtonGroup();
+        
+        g2.add(radio1);
+        g2.add(radio2);
+        g2.add(radio3);
+        
         populateCitiesTable();
     }
     
@@ -58,6 +69,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
         model.setRowCount(0);
         
+        if(cityDir.getCityDir() != null) {
         for(City c : cityDir.getCityDir()) {
             
             Object[] row = new Object[11];
@@ -66,6 +78,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
 
             
             model.addRow(row);
+        }
         }
     }
     
@@ -141,6 +154,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         btnModifyComm = new javax.swing.JButton();
         btnModifyDoc = new javax.swing.JButton();
         btnModifyPat = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
 
         jLabel1.setText("Hospital Read/Update/Delete");
 
@@ -242,33 +256,39 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
             }
         });
 
-        btnModifyHouses.setText("Modify Houses");
+        btnModifyHouses.setText("Go To Modify Houses");
         btnModifyHouses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyHousesActionPerformed(evt);
             }
         });
 
-        btnModifyComm.setText("Modify Cities/Communities");
+        btnModifyComm.setText("Go To Modify Cities/Communities");
         btnModifyComm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyCommActionPerformed(evt);
             }
         });
 
-        btnModifyDoc.setText("Modify Doctors");
+        btnModifyDoc.setText("Go To Modify Doctors");
         btnModifyDoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyDocActionPerformed(evt);
             }
         });
 
-        btnModifyPat.setText("Modify Patients");
+        btnModifyPat.setText("Go To Modify Patients");
         btnModifyPat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyPatActionPerformed(evt);
             }
         });
+
+        jLabel12.setBackground(new java.awt.Color(0, 153, 102));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel12.setText("                                System Admin: Modify Hospitals");
+        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -277,7 +297,16 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(140, 140, 140)
+                        .addComponent(btnModifyHouses)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnModifyComm, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnModifyDoc)
+                        .addGap(31, 31, 31)
+                        .addComponent(btnModifyPat))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBackToSysAdmin)
@@ -310,29 +339,22 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(111, 111, 111)
                                         .addComponent(btnUpdateHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(btnDislayCom)
-                        .addGap(144, 144, 144)
-                        .addComponent(btnDisplayHosp)
-                        .addGap(71, 71, 71)
-                        .addComponent(btnDeleteHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(btnModifyHouses, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModifyComm, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModifyDoc, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnModifyPat, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addComponent(btnDislayCom)
+                                .addGap(144, 144, 144)
+                                .addComponent(btnDisplayHosp)
+                                .addGap(71, 71, 71)
+                                .addComponent(btnDeleteHosp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(69, Short.MAX_VALUE))
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addComponent(jLabel12)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(btnBackToSysAdmin))
@@ -363,13 +385,13 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                     .addComponent(radioPrivate))
                 .addGap(42, 42, 42)
                 .addComponent(btnUpdateHospital)
-                .addGap(67, 67, 67)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModifyHouses)
                     .addComponent(btnModifyComm)
                     .addComponent(btnModifyDoc)
                     .addComponent(btnModifyPat))
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -391,7 +413,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
         
         for(City c: cDir) {            
-            if(c.getCityName() == (cityName)) {      
+            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {      
                 populateCommunitiesTable(c.getCommunityDir());
             }            
         }
@@ -434,7 +456,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
                 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName)) {
+                    if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
                         populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
                     }
                 }       
@@ -552,15 +574,21 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         else if(radio2.isSelected() == true) {
             rating = 2;
         }
-        else {
+        else if(radio3.isSelected() == true) {
             rating = 3;
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select a rating.");
         }
 
         if(radioCommunity.isSelected() == true) {
             hospitalType = "Community Hospital";
         }
-        else {
+        else if(radioPrivate.isSelected() == true){
             hospitalType = "Private Hospital";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select a hospital type.");
         }
 
         int selectedRowIndex = tblCities.getSelectedRow();
@@ -632,6 +660,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                                     
                                     populateHospitalsHousesTable(hospDir,com.getHouseDir());
                                     
+                                    JOptionPane.showMessageDialog(this, "Hospital updated!");
                                 }
                             }
                             
@@ -696,6 +725,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnModifyPat;
     private javax.swing.JButton btnUpdateHospital;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

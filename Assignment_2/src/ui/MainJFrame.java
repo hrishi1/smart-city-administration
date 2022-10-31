@@ -128,8 +128,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
         splitPane.setPreferredSize(new java.awt.Dimension(2043, 1000));
 
+        workArea.setBackground(new java.awt.Color(255, 255, 255));
         workArea.setMinimumSize(new java.awt.Dimension(200, 200));
-        workArea.setPreferredSize(new java.awt.Dimension(1018, 700));
+        workArea.setPreferredSize(new java.awt.Dimension(1200, 700));
 
         lblTitle.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         lblTitle.setText("AED Assignment 2");
@@ -147,10 +148,14 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(workAreaLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDetails2)
-                    .addComponent(lblDetails)
-                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(613, Short.MAX_VALUE))
+                    .addGroup(workAreaLayout.createSequentialGroup()
+                        .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDetails)
+                            .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(703, Short.MAX_VALUE))
+                    .addGroup(workAreaLayout.createSequentialGroup()
+                        .addComponent(lblDetails2)
+                        .addGap(33, 890, Short.MAX_VALUE))))
         );
         workAreaLayout.setVerticalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,11 +166,12 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(lblDetails)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDetails2)
-                .addContainerGap(583, Short.MAX_VALUE))
+                .addContainerGap(577, Short.MAX_VALUE))
         );
 
         splitPane.setRightComponent(workArea);
 
+        controlPanel.setBackground(new java.awt.Color(255, 255, 255));
         controlPanel.setMinimumSize(new java.awt.Dimension(200, 200));
         controlPanel.setPreferredSize(new java.awt.Dimension(1018, 700));
 
@@ -212,7 +218,7 @@ public class MainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(splitPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1290, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

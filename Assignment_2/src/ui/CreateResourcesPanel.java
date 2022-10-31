@@ -85,6 +85,7 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblCities.getModel();
         model.setRowCount(0);
         
+        if (cityDir.getCityDir() != null) {
         for(City c : cityDir.getCityDir()) {
             
             Object[] row = new Object[11];
@@ -93,6 +94,7 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
 
             
             model.addRow(row);
+        }
         }
         }   
     
@@ -162,6 +164,10 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         txtStreet = new javax.swing.JTextField();
         txtZip = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+
+        setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel1.setText("City Name:");
 
@@ -185,7 +191,15 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
             new String [] {
                 "Cities"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(tblCities);
 
         tblCommunities.setModel(new javax.swing.table.DefaultTableModel(
@@ -199,7 +213,15 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
             new String [] {
                 "Communities"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(tblCommunities);
 
         btnDispCommunities.setText("Display Communities");
@@ -288,53 +310,67 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
 
         jLabel14.setText("Zip code:");
 
+        jLabel15.setBackground(new java.awt.Color(0, 153, 102));
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel15.setText("                                System Admin: Create Resources");
+        jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDispCommunities1)
-                        .addGap(37, 37, 37)
-                        .addComponent(btnDispCommunities)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCreateCity, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(277, 277, 277)
-                        .addComponent(btnCreateComm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(92, 92, 92)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnCreateHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8))
-                                .addGap(32, 32, 32)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(radio1)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(radio2)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(radio3))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(radioCommunity)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(radioPrivate))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(111, 111, 111)
+                                        .addComponent(btnCreateHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(55, 55, 55)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtHospitalName, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(radio1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(radio2)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(radio3))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(radioCommunity)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(radioPrivate))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(btnBackToSysAdmin))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(111, 111, 111)
-                                .addComponent(btnCreateHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(55, 55, 55)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14))
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtHouseNum)
+                                    .addComponent(txtHouseID)
+                                    .addComponent(txtStreet)
+                                    .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(87, 87, 87)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,8 +379,13 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                                    .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(136, 136, 136)
+                                .addComponent(btnCreateCity, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4)
@@ -355,39 +396,41 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
                                     .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(radioUrban)
-                                        .addGap(31, 31, 31)
+                                        .addGap(18, 18, 18)
                                         .addComponent(radioRural))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14))
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtHouseNum, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                                    .addComponent(txtHouseID)
-                                    .addComponent(txtStreet)
-                                    .addComponent(txtZip))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(58, 58, 58))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCreateHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(502, 502, 502))
+                                .addGap(176, 176, 176)
+                                .addComponent(btnCreateComm, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(79, 79, 79))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnBackToSysAdmin)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDispCommunities1)
+                                .addGap(37, 37, 37)
+                                .addComponent(btnDispCommunities)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addComponent(jSeparator1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBackToSysAdmin)
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnDispCommunities1)
+                            .addComponent(btnDispCommunities)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(77, 77, 77)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(68, 68, 68)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel3)
                                 .addComponent(txtCommunityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -398,30 +441,27 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
-                                .addComponent(jLabel2)
-                                .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(radioUrban)
                                 .addComponent(radioRural))
-                            .addGap(5, 5, 5)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(btnBackToSysAdmin)
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(108, 108, 108)))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCreateComm)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnDispCommunities1)
-                        .addComponent(btnDispCommunities)
-                        .addComponent(btnCreateCity)))
-                .addGap(60, 60, 60)
+                            .addGap(37, 37, 37)
+                            .addComponent(btnCreateComm))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(57, 57, 57)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(137, 137, 137)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(txtState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(39, 39, 39)
+                            .addComponent(btnCreateCity))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -460,7 +500,7 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
                             .addComponent(jLabel13))))
                 .addGap(16, 16, 16)
                 .addComponent(btnCreateHouse)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -483,9 +523,11 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
 
         for(City c: cDir) {
             if(c.getCityName() == (cityName)) {
-                try { populateCommunitiesTable(c.getCommunityDir()); }
-                catch(Exception e) {
-                    System.out.println("Community Not Added");
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir()); 
+                }
+                else {
+                    JOptionPane.showMessageDialog(this, "Communities not available!");
                 }
             }
         }
@@ -512,6 +554,9 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
         
         c.setCityName(cityName);
         c.setState(state);
+        
+        JOptionPane.showMessageDialog(this, "City created!");
+
 
     }//GEN-LAST:event_btnCreateCityActionPerformed
 
@@ -537,8 +582,12 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
         if(radioUrban.isSelected() == true) {
             communityType = "Urban Community";
         }
-        else {
+        else if(radioRural.isSelected() == true) {
             communityType = "Rural Community";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select a community type.");
+            return;
         }
         
         //Traversing city dir to get the right city object
@@ -569,6 +618,9 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
                     c.setCommunityDir(comDir);
                     
                 }
+                
+                JOptionPane.showMessageDialog(this, "Community created!");
+
             }
         }
         
@@ -602,15 +654,22 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
         else if(radio2.isSelected() == true) {
             rating = 2;
         }
-        else {
+        else if(radio3.isSelected() == true) {
             rating = 3;
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select a rating.");
+            return;
         }
         
         if(radioCommunity.isSelected() == true) {
             hospitalType = "Community Hospital";
         }
-        else {
+        else if(radioPrivate.isSelected() == true) {
             hospitalType = "Private Hospital";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select a hospital type.");
         }
         
         
@@ -673,6 +732,8 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
                             
                             com.setHospitalDir(hospDir);
                         }
+                        
+                        JOptionPane.showMessageDialog(this, "Hospital created!");
                         
                         //                                //Test
 //                                HospitalDir hospDir = com.getHospitalDir();
@@ -756,17 +817,19 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
                             com.setHouseDir(houseDir);
                         }
                         
+                        JOptionPane.showMessageDialog(this, "House created.");
+                        
                                                         //Test
-                                HouseDir houseDir = com.getHouseDir();
-                                ArrayList<House> p_temp = houseDir.getHouseDir();
-
-                                for(House p : p_temp) {
-                                    System.out.println("hospital:"+p.getHouseNum());
+//                                HouseDir houseDir = com.getHouseDir();
+//                                ArrayList<House> p_temp = houseDir.getHouseDir();
+//
+//                                for(House p : p_temp) {
+//                                    System.out.println("hospital:"+p.getHouseNum());
                                }
                     }
                 }
             }
-        }
+        
         
     }//GEN-LAST:event_btnCreateHouseActionPerformed
 
@@ -784,6 +847,7 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -794,6 +858,7 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JRadioButton radio1;
     private javax.swing.JRadioButton radio2;
     private javax.swing.JRadioButton radio3;

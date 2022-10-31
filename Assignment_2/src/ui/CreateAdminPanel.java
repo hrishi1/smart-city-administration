@@ -6,6 +6,7 @@
 package ui;
 
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import model.CityDir;
 import model.CommunityDir;
@@ -63,7 +64,6 @@ public class CreateAdminPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -72,8 +72,9 @@ public class CreateAdminPanel extends javax.swing.JPanel {
         radioHosAd = new javax.swing.JRadioButton();
         btnCreate = new javax.swing.JButton();
         btnBackToSysAdmin = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
 
-        jLabel1.setText("Create Admins");
+        setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel2.setText("Username:");
 
@@ -103,50 +104,56 @@ public class CreateAdminPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel12.setBackground(new java.awt.Color(0, 153, 102));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel12.setText("                                System Admin: Create Admins");
+        jLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 1128, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnBackToSysAdmin)
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(221, 221, 221)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtUname, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                    .addComponent(txtPassword)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(radioComAd)
-                                .addGap(30, 30, 30)
-                                .addComponent(radioHosAd)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 295, Short.MAX_VALUE)
-                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(655, 655, 655))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtUname)
+                                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(radioComAd)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(radioHosAd)))
+                                .addGap(362, 362, 362))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(466, 466, 466))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnBackToSysAdmin))
-                .addGap(36, 36, 36)
+                .addComponent(jLabel12)
+                .addGap(43, 43, 43)
+                .addComponent(btnBackToSysAdmin)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtUname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -156,7 +163,7 @@ public class CreateAdminPanel extends javax.swing.JPanel {
                     .addComponent(radioHosAd))
                 .addGap(50, 50, 50)
                 .addComponent(btnCreate)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addContainerGap(258, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -176,12 +183,18 @@ public class CreateAdminPanel extends javax.swing.JPanel {
         else if(radioHosAd.isSelected() == true) {
             userType = "Hospital Admin";
         }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select admin type.");
+        }
         
         UserAuth ua = userAuthDir.addNewUserAuth();
         
         ua.setPassword(password);
         ua.setUserName(uname);
         ua.setUserType(userType);
+        
+        JOptionPane.showMessageDialog(this, "Admin created!");
+
         
         
     }//GEN-LAST:event_btnCreateActionPerformed
@@ -199,7 +212,7 @@ public class CreateAdminPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBackToSysAdmin;
     private javax.swing.JButton btnCreate;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JRadioButton radioComAd;
