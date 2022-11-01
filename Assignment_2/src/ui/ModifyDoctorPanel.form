@@ -49,10 +49,7 @@
                                       </Group>
                                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="txtFname" min="-2" pref="156" max="-2" attributes="0"/>
-                                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                          </Group>
+                                          <Component id="txtFname" alignment="0" min="-2" pref="156" max="-2" attributes="0"/>
                                           <Component id="txtSpecialization" min="-2" pref="157" max="-2" attributes="0"/>
                                           <Component id="txtQualification" min="-2" pref="157" max="-2" attributes="0"/>
                                       </Group>

@@ -503,12 +503,16 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                                     for(Patient d : dir) {
 
                                         if(d.getName().equalsIgnoreCase(patientName)) {
+                                            
+                                            d.setName(fName);
+                                            d.setInsured(insured);
 
-                                            Patient updatedPat = new Patient();
-                                            updatedPat.setName(fName);
-                                            updatedPat.setInsured(insured);
-
-                                            patDir.updatePatient(d, updatedPat);
+//                                            Patient updatedPat = new Patient();
+//                                            
+//                                            updatedPat.setName(fName);
+//                                            updatedPat.setInsured(insured);
+//
+//                                            patDir.updatePatient(d, updatedPat);
 
                                             populatePatients(patDir);
 
@@ -531,12 +535,14 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                                                         for(Person p: pDir) {
 
                                                             if(p.getFname().equalsIgnoreCase(patientName)) {
+                                                                
+                                                                  p.setFname(fName);
 
-                                                                Person person = new Person();
-
-                                                                person.setFname(fName);
-
-                                                                personDir.updatePerson(p, person);
+//                                                                Person person = new Person();
+//
+//                                                                person.setFname(fName);
+//
+//                                                                personDir.updatePerson(p, person);
                                                                 
                                                                 JOptionPane.showMessageDialog(this, "Patient updated!");
 
@@ -569,45 +575,6 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 
                             }
                         }
-
-                        // Code for updating Persons
-                        //Traversing houses to find the selected house
-                        //                        ArrayList<House> hoDir = houseDir.getHouseDir();
-                        //
-                        //                        for(House h: hoDir) {
-                            //                            if(h.getHouseID().equalsIgnoreCase(doctorHouse))
-                            //                            {
-                                //                                //If personDir already present in the selected House
-                                //                                if(h.getPersonDir() != null) {
-                                    //
-                                    //                                    PersonDir personDir = h.getPersonDir();
-                                    //
-                                    //                                    ArrayList<Person> dir = personDir.getPersonDir();
-                                    //
-                                    //                                    for(Person p: dir) {
-                                        //
-                                        //                                        if(p.getFname().equalsIgnoreCase(doctorName)) {
-                                            //
-                                            //                                            Person person = new Person();
-                                            //
-                                            //                                            person.setFname(fName);
-                                            //
-                                            //                                            personDir.updatePerson(p, person);
-                                            //                                        }
-                                        //                                    }
-                                    //
-                                    //                                }
-                                //
-                                //                                //Test
-                                ////                                                                                                PersonDir personDir = h.getPersonDir();
-                                ////                                                                                                ArrayList<Person> p_temp = personDir.getPersonDir();
-                                ////
-                                ////                                                                                                for(Person p : p_temp) {
-                                    ////                                                                                                            System.out.println("person:"+p.getFname());
-                                    ////                                                                                                        }
-                                //                            }
-                            //                        }
-
                     }
 
                 }
@@ -633,12 +600,14 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
-                populateCommunitiesTable(c.getCommunityDir());
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Communities not available.");
-            }
+            if(c.getCityName() == (cityName)) {
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir());
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
+        }
         }
     }//GEN-LAST:event_btnDispCommunitiesActionPerformed
 
@@ -679,11 +648,13 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Hospitals not availalble.");
+                    if(com.getCommunityName().contains(communityName)) {
+                        if(com.getHospitalDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(), new HouseDir());
+                        }
                     }
                 }
             }
@@ -751,8 +722,7 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                                     populatePatients(h.getPatientDir());
                                 }
                                 else {
-                                    JOptionPane.showMessageDialog(this, "No Patients available.");
-                                    return;
+                                    populatePatients(new PatientDir());
                                 }
                             }
                         }

@@ -743,7 +743,12 @@ public class SySAdminPanel extends javax.swing.JPanel {
 
         for(City c: cDir) {
             if(c.getCityName() == (cityName)) {
-                populateCommunitiesTable(c.getCommunityDir());
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir());
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
             }
         }
 
@@ -756,7 +761,7 @@ public class SySAdminPanel extends javax.swing.JPanel {
 
         if (selectedRowIndexCity < 0 ) {
 
-            JOptionPane.showMessageDialog(this, "Please select a row to update.");
+            JOptionPane.showMessageDialog(this, "Please select a city.");
             return;
         }
 
@@ -787,9 +792,22 @@ public class SySAdminPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
                 
                 for(Community com: comDir) {
+                    
                     if(com.getCommunityName().contains(communityName)) {
-                        System.out.println(com.getHouseDir());
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        if(com.getHospitalDir() != null && com.getHouseDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    }
+                        else if(com.getHospitalDir() != null && com.getHouseDir() == null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),new HouseDir());
+                        }
+                        
+                        else if(com.getHospitalDir() == null && com.getHouseDir() != null) {
+                            populateHospitalsHousesTable(new HospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(),new HouseDir());
+                        }
+                        
                     }
                 }       
             }

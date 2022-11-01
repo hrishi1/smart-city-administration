@@ -510,8 +510,13 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName().equalsIgnoreCase(cityName) && c.getCommunityDir() != null) {
-                populateCommunitiesTable(c.getCommunityDir());
+            if(c.getCityName().equalsIgnoreCase(cityName)) {
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir());
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
             }
         }
     }//GEN-LAST:event_btnDispCommunitiesActionPerformed
@@ -553,8 +558,13 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    if(com.getCommunityName().contains(communityName) ) {
+                        if(com.getHospitalDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(),new HouseDir());
+                        }
                     }
                 }
             }
@@ -622,8 +632,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
                                     populateDoctors(h.getDoctorDir());
                                 }
                                 else {
-                                    JOptionPane.showMessageDialog(this, "No Doctors available.");
-                                    return;
+                                    populateDoctors(new DoctorDir());
                                 }
                             }
                         }
@@ -697,8 +706,7 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
                                     populatePatients(h.getPatientDir());
                                 } 
                                 else {
-                                    JOptionPane.showMessageDialog(this, "No Patients available.");
-                                    return;
+                                    populatePatients(new PatientDir());
                                 }
                             }
                         }

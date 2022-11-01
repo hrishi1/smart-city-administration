@@ -130,7 +130,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
         btnDislayCom = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtHouseNum = new javax.swing.JTextField();
-        btnCreateHouse = new javax.swing.JButton();
+        btnUpdateHouse = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         txtHouseID = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
@@ -208,10 +208,10 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
 
         jLabel9.setText("House Number:");
 
-        btnCreateHouse.setText("Update House");
-        btnCreateHouse.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdateHouse.setText("Update House");
+        btnUpdateHouse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCreateHouseActionPerformed(evt);
+                btnUpdateHouseActionPerformed(evt);
             }
         });
 
@@ -249,7 +249,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnCreateHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdateHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(478, 478, 478))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,7 +322,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                     .addComponent(jLabel14)
                     .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(btnCreateHouse)
+                .addComponent(btnUpdateHouse)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModifyComm)
@@ -367,11 +367,13 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName) && com.getHouseDir() != null) {
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Houses not available.");
+                    if(com.getCommunityName().contains(communityName)) {
+                        if(com.getHouseDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(),new HouseDir());
+                        }
                     }
                 }
             }
@@ -471,18 +473,23 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
         String cityName = (String) model.getValueAt(selectedRowIndex, 0);
 
         ArrayList<City> cDir = cityDir.getCityDir();
-
+        
         for(City c: cDir) {
-            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
+            if(c.getCityName() == (cityName)) {
+                
+                if(c.getCommunityDir() != null) {
                 populateCommunitiesTable(c.getCommunityDir());
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Communities not available.");
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
             }
         }
+
+
     }//GEN-LAST:event_btnDislayComActionPerformed
 
-    private void btnCreateHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateHouseActionPerformed
+    private void btnUpdateHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateHouseActionPerformed
         // TODO add your handling code here:
 
         houseNum = txtHouseNum.getText();
@@ -544,15 +551,20 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                             for(House h : hDir) {
                                 
                                 if(h.getHouseID().equalsIgnoreCase(selectedHouse)) {
-                                
-                                    House house = new House();
 
-                                    house.setHouseID(houseID);
-                                    house.setHouseNum(houseNum);
-                                    house.setStreet(street);
-                                    house.setZipCode(zipCode);
-                                    
-                                    houseDir.updateHouse(h, house);
+                                    h.setHouseID(houseID);
+                                    h.setHouseNum(houseNum);
+                                    h.setStreet(street);
+                                    h.setZipCode(zipCode);
+
+//                                    House house = new House();
+//
+//                                    house.setHouseID(houseID);
+//                                    house.setHouseNum(houseNum);
+//                                    house.setStreet(street);
+//                                    house.setZipCode(zipCode);
+//                                    
+//                                    houseDir.updateHouse(h, house);
                                     
                                     populateHospitalsHousesTable(com.getHospitalDir(),houseDir);
                                     
@@ -572,7 +584,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
             }
         }
 
-    }//GEN-LAST:event_btnCreateHouseActionPerformed
+    }//GEN-LAST:event_btnUpdateHouseActionPerformed
 
     private void btnModifyCommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyCommActionPerformed
         // TODO add your handling code here:
@@ -594,12 +606,12 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCreateHouse;
     private javax.swing.JButton btnDeleteHouses;
     private javax.swing.JButton btnDislayCom;
     private javax.swing.JButton btnDisplayHouses;
     private javax.swing.JButton btnModifyComm;
     private javax.swing.JButton btnModifyPerson;
+    private javax.swing.JButton btnUpdateHouse;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

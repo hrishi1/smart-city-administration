@@ -103,10 +103,14 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
     private void populateHospitalsHousesTable(HospitalDir hospitalDir, HouseDir houseDir) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
+        System.out.println("Inside populate.");
+        
         DefaultTableModel model = (DefaultTableModel) tblHospitals.getModel();
         model.setRowCount(0);
         
         for(Hospital c : hospitalDir.getHospitalDir()) {
+            
+            System.out.println("In the for loop.");
             
             Object[] row = new Object[11];
             //row[0] = house;
@@ -409,9 +413,14 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
         
         for(City c: cDir) {            
-            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {      
-                populateCommunitiesTable(c.getCommunityDir());
-            }            
+            if(c.getCityName() == (cityName)) {
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir());
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
+            }        
         }
     }//GEN-LAST:event_btnDislayComActionPerformed
 
@@ -452,13 +461,15 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
                 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    if(com.getCommunityName().contains(communityName)) {
+                        if(com.getHospitalDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(),new HouseDir());
+                        }
                     }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Hospitals not available.");
-                    }
-                }       
+                }
             }
         }
     }//GEN-LAST:event_btnDisplayHospActionPerformed
@@ -475,6 +486,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
 
     private void btnDeleteHospActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHospActionPerformed
         // TODO add your handling code here:
+        System.out.println("Step 1");
         
         int selectedRowIndexCity = tblCities.getSelectedRow();
 
@@ -513,6 +525,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                 for(Community com: comDir) {
                     if(com.getCommunityName().equalsIgnoreCase(communityName)) {
                                                
+                        System.out.println("Step 2");
                         
                         selectedRowIndexCity = tblHospitals.getSelectedRow();
 
@@ -525,6 +538,8 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                         model = (DefaultTableModel) tblHospitals.getModel();
                         String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
                         
+                        System.out.println("Step 3");
+                        
                         HospitalDir hospDir = com.getHospitalDir();
                         
                         ArrayList<Hospital> hDir = hospDir.getHospitalDir();
@@ -532,10 +547,13 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                         for(Hospital h : hDir ) {
                             if(h.getHospitalName().equalsIgnoreCase(hospitalName)) {                                
                                 
+                                System.out.println("Before Delete");
                                 hospDir.deleteHospital(h);
+                                System.out.println("After Delete");
                                 
                                 if(com.getHospitalDir() != null) {
                                     populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                                    JOptionPane.showMessageDialog(this, "Hospital deleted.");
                                 }
                                 break;
                                 
@@ -648,16 +666,14 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                             ArrayList<Hospital> hDir = hospDir.getHospitalDir();
 
                             
-                            for(Hospital h: hDir) {
-                                if(h.getHospitalName().equalsIgnoreCase(selectedHospital)) {
-                                    
-                                    Hospital updated_hospital = new Hospital();
+                            for(Hospital updated_hospital: hDir) {
+                                if(updated_hospital.getHospitalName().equalsIgnoreCase(selectedHospital)) {
 
                                     updated_hospital.setHospitalName(hospitalName);
                                     updated_hospital.setRating(rating);
                                     updated_hospital.setHospitalType(hospitalType);
                                     
-                                    hospDir.updateHospital(h,updated_hospital);
+                                    //hospDir.updateHospital(h,updated_hospital);
                                     
                                     populateHospitalsHousesTable(hospDir,com.getHouseDir());
                                     

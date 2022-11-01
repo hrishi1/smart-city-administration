@@ -529,11 +529,10 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
                     populateCommunitiesTable(c.getCommunityDir()); 
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "Communities not available!");
+                    populateCommunitiesTable(new CommunityDir()); 
                 }
             }
         }
-
     }//GEN-LAST:event_btnDispCommunitiesActionPerformed
 
     private void btnBackToSysAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToSysAdminActionPerformed
@@ -635,7 +634,8 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_radioUrbanActionPerformed
 
     private void btnDispCommunities1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDispCommunities1ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
+        
         populateCitiesTable();
         
     }//GEN-LAST:event_btnDispCommunities1ActionPerformed

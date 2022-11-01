@@ -68,6 +68,7 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
             Object[] row = new Object[11];
             //row[0] = house;
             row[0] = c.getCityName();
+            row[1] = c.getState();
 
             
             model.addRow(row);
@@ -384,8 +385,13 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
-                populateCommunitiesTable(c.getCommunityDir());
+            if(c.getCityName() == (cityName)) {
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir());
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
             }
         }
     }//GEN-LAST:event_btnDislayComActionPerformed
@@ -495,15 +501,22 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
                     
                     for(Community com : cDir2) {                                                
                                 
-                        if(com.getCommunityName().equalsIgnoreCase(selectedCommunity)) {                           
-                                    
-                            Community updated_com = new Community();
+                        if(com.getCommunityName().equalsIgnoreCase(selectedCommunity)) { 
                             
-                            updated_com.setCommunityName(communityName);
-                            updated_com.setCommunityType(communityType);
-                            updated_com.setMajorityReligion(religion);
+                            
+                            com.setCommunityName(communityName);
+                            com.setCommunityType(communityType);
+                            com.setMajorityReligion(religion);
+                                    
+//                            Community updated_com = new Community();
+//                            
+//                            updated_com.setCommunityName(communityName);
+//                            updated_com.setCommunityType(communityType);
+//                            updated_com.setMajorityReligion(religion);
+//
+//                            comDir.updateCommunity(com, updated_com);
 
-                            comDir.updateCommunity(com, updated_com);
+
                             
                             populateCommunitiesTable(comDir);                            
                             
@@ -543,14 +556,18 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
         for(City c: cDir) {
             if(c.getCityName().equalsIgnoreCase(selectedCity)) { 
                 
-                City updated_city = cityDir.addNewCity();
-
-                updated_city.setCityName(cityName);
-                updated_city.setState(state);
+                c.setCityName(cityName);
+                c.setState(state);
                 
-                cityDir.updateCity(c, updated_city);                
+//                City updated_city = cityDir.addNewCity();
+//
+//                updated_city.setCityName(cityName);
+//                updated_city.setState(state);
+//                
+//                cityDir.updateCity(c, updated_city);                
+//                
+                //cDir.remove(cDir.size()-1);
                 
-                cDir.remove(cDir.size()-1);
                 
                 populateCitiesTable();
                 JOptionPane.showMessageDialog(this, "City updated!");

@@ -238,7 +238,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(436, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnCreateHouse, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,7 +274,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                         .addGap(71, 71, 71)
                         .addComponent(btnDeleteHouses, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnModifyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -351,12 +351,14 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName) && com.getHouseDir() != null) {
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Houses not available.");
-                    }
+                    if(com.getCommunityName().contains(communityName)) {
+                        if(com.getHouseDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(), new HouseDir());
+                        }
+                    }                    
                 }
             }
         }
@@ -459,13 +461,14 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
-                populateCommunitiesTable(c.getCommunityDir());
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Communities not available");
-                return;
-            }
+            if(c.getCityName() == (cityName)) {
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir());
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
+            }         
         }
     }//GEN-LAST:event_btnDislayComActionPerformed
 
@@ -531,15 +534,20 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                             for(House h : hDir) {
                                 
                                 if(h.getHouseID().equalsIgnoreCase(selectedHouse)) {
-                                
-                                    House house = new House();
-
-                                    house.setHouseID(houseID);
-                                    house.setHouseNum(houseNum);
-                                    house.setStreet(street);
-                                    house.setZipCode(zipCode);
                                     
-                                    houseDir.updateHouse(h, house);
+                                    h.setHouseID(houseID);
+                                    h.setHouseNum(houseNum);
+                                    h.setStreet(street);
+                                    h.setZipCode(zipCode);
+                                
+//                                    House house = new House();
+//
+//                                    house.setHouseID(houseID);
+//                                    house.setHouseNum(houseNum);
+//                                    house.setStreet(street);
+//                                    house.setZipCode(zipCode);
+//                                    
+//                                    houseDir.updateHouse(h, house);
                                     
                                     populateHospitalsHousesTable(com.getHospitalDir(),houseDir);
                                 }

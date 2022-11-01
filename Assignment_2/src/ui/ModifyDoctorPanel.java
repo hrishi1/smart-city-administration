@@ -508,12 +508,18 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                                         
                                         if(d.getName().equalsIgnoreCase(doctorName)) {
                                             
-                                            Doctor updatedDoc = new Doctor();
-                                            updatedDoc.setName(fName);
-                                            updatedDoc.setQualification(qualification);
-                                            updatedDoc.setSpecialization(specialization);
+                                            d.setName(fName);
+                                            d.setQualification(qualification);
+                                            d.setSpecialization(specialization);
                                             
-                                            docDir.updateDoctor(d, updatedDoc);
+//                                            Doctor updatedDoc = new Doctor();
+//                                            updatedDoc.setName(fName);
+//                                            updatedDoc.setQualification(qualification);
+//                                            updatedDoc.setSpecialization(specialization);
+//                                            
+//                                            docDir.updateDoctor(d, updatedDoc);
+
+
 
                                             populateDoctors(docDir);
 
@@ -537,12 +543,14 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                                                         
 
                                                         if(p.getFname().equalsIgnoreCase(doctorName)) {
+                                                            
+                                                            p.setFname(fName);
 
-                                                            Person person = new Person();
-
-                                                            person.setFname(fName);
-
-                                                            personDir.updatePerson(p, person);
+//                                                            Person person = new Person();
+//
+//                                                            person.setFname(fName);
+//
+//                                                            personDir.updatePerson(p, person);
                                                             
                                                             JOptionPane.showMessageDialog(this, "Doctor updated!");
                                                         }
@@ -601,12 +609,13 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
-                populateCommunitiesTable(c.getCommunityDir());
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Communities not available!");
-                
+            if(c.getCityName() == (cityName)) {
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir());
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
             }
         }
     }//GEN-LAST:event_btnDispCommunitiesActionPerformed
@@ -648,13 +657,14 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
-                        System.out.println(com.getHouseDir());
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Doctors not available.");
-
+                    
+if(com.getCommunityName().contains(communityName)) {
+                        if(com.getHospitalDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(), new HouseDir());
+                        }
                     }
                 }
             }
@@ -726,8 +736,7 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                                     populateDoctors(h.getDoctorDir());
                                 }
                                 else {
-                                    JOptionPane.showMessageDialog(this, "No Doctors available.");
-                                    return;
+                                    populateDoctors(new DoctorDir());
                                 }
                             }
                         }                        

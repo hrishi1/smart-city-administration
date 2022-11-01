@@ -342,7 +342,7 @@ public class HAModifyPanel extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addComponent(btnUpdateHospital)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnModifyDoc)
                     .addComponent(btnModifyPat))
                 .addContainerGap(124, Short.MAX_VALUE))
@@ -370,9 +370,6 @@ public class HAModifyPanel extends javax.swing.JPanel {
             if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {      
                 populateCommunitiesTable(c.getCommunityDir());
             }            
-            else {
-                JOptionPane.showMessageDialog(this, "Communities not available.");
-            }
         }
     }//GEN-LAST:event_btnDislayComActionPerformed
 
@@ -413,11 +410,13 @@ public class HAModifyPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
                 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().contains(communityName) && com.getHospitalDir() != null) {
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this, "Hospitals not available.");
+                    if(com.getCommunityName().contains(communityName)) {
+                        if(com.getHospitalDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(), new HouseDir());
+                        }
                     }
                 }       
             }
@@ -601,13 +600,17 @@ public class HAModifyPanel extends javax.swing.JPanel {
                             for(Hospital h: hDir) {
                                 if(h.getHospitalName().equalsIgnoreCase(selectedHospital)) {
                                     
-                                    Hospital updated_hospital = new Hospital();
+                                    h.setHospitalName(hospitalName);
+                                    h.setRating(rating);
+                                    h.setHospitalType(hospitalType);
 
-                                    updated_hospital.setHospitalName(hospitalName);
-                                    updated_hospital.setRating(rating);
-                                    updated_hospital.setHospitalType(hospitalType);
-                                    
-                                    hospDir.updateHospital(h,updated_hospital);
+//                                    Hospital updated_hospital = new Hospital();
+//
+//                                    updated_hospital.setHospitalName(hospitalName);
+//                                    updated_hospital.setRating(rating);
+//                                    updated_hospital.setHospitalType(hospitalType);
+//                                    
+//                                    hospDir.updateHospital(h,updated_hospital);
                                     
                                     populateHospitalsHousesTable(hospDir,com.getHouseDir());
                                     

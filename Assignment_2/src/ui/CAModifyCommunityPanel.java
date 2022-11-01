@@ -312,11 +312,14 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
 
         for(City c: cDir) {
-            if(c.getCityName() == (cityName) && c.getCommunityDir() != null) {
+            if(c.getCityName() == (cityName)) {
+                
+                if(c.getCommunityDir() != null) {
                 populateCommunitiesTable(c.getCommunityDir());
-            }
-            else {
-                JOptionPane.showMessageDialog(this, "Communities not available.");
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
             }
         }
     }//GEN-LAST:event_btnDislayComActionPerformed
@@ -428,14 +431,18 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
                     for(Community com : cDir2) {                                                
                                 
                         if(com.getCommunityName().equalsIgnoreCase(selectedCommunity)) {                           
-                                    
-                            Community updated_com = new Community();
                             
-                            updated_com.setCommunityName(communityName);
-                            updated_com.setCommunityType(communityType);
-                            updated_com.setMajorityReligion(religion);
-
-                            comDir.updateCommunity(com, updated_com);
+                            com.setCommunityName(communityName);
+                            com.setCommunityType(communityType);
+                            com.setMajorityReligion(religion);
+                                    
+//                            Community updated_com = new Community();
+//                            
+//                            updated_com.setCommunityName(communityName);
+//                            updated_com.setCommunityType(communityType);
+//                            updated_com.setMajorityReligion(religion);
+//
+//                            comDir.updateCommunity(com, updated_com);
                             
                             populateCommunitiesTable(comDir);  
                             

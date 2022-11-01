@@ -721,9 +721,14 @@ public class PatientRegPanel extends javax.swing.JPanel {
         ArrayList<City> cDir = cityDir.getCityDir();
         
         for(City c: cDir) {            
-            if(c.getCityName() == (cityName)) {      
-                populateCommunitiesTable(c.getCommunityDir());
-            }            
+            if(c.getCityName() == (cityName)) {
+                if(c.getCommunityDir() != null) {
+                    populateCommunitiesTable(c.getCommunityDir());
+                }
+                else {
+                    populateCommunitiesTable(new CommunityDir());
+                }
+            }           
         }
         
         
@@ -768,7 +773,20 @@ public class PatientRegPanel extends javax.swing.JPanel {
                 
                 for(Community com: comDir) {
                     if(com.getCommunityName().contains(communityName)) {
-                        populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                        if(com.getHospitalDir() != null && com.getHouseDir() != null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                    }
+                        else if(com.getHospitalDir() != null && com.getHouseDir() == null) {
+                            populateHospitalsHousesTable(com.getHospitalDir(),new HouseDir());
+                        }
+                        
+                        else if(com.getHospitalDir() == null && com.getHouseDir() != null) {
+                            populateHospitalsHousesTable(new HospitalDir(),com.getHouseDir());
+                        }
+                        else {
+                            populateHospitalsHousesTable(new HospitalDir(),new HouseDir());
+                        }
+                        
                     }
                 }       
             }

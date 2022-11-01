@@ -425,8 +425,7 @@ public class PatientPanel extends javax.swing.JPanel {
                                     populateDoctors(h.getDoctorDir());
                                 }
                                 else {
-                                    JOptionPane.showMessageDialog(this, "No Doctors available.");
-                                    return;
+                                    populateDoctors(new DoctorDir());
                                 }
                             }
                         }
