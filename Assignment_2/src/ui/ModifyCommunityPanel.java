@@ -400,7 +400,8 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         int selectedRowIndexCity = tblCities.getSelectedRow();
-
+        int flag = 0;
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a city.");
@@ -439,10 +440,13 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
                         communityDir.deleteCommunity(com);
                         populateCommunitiesTable(communityDir);
                         JOptionPane.showMessageDialog(this, "Community deleted!");
+                        flag = 1;
                         break;
                     }
                 }
             }
+            if(flag == 1)
+                                                    break;
         }
     }//GEN-LAST:event_btnDeleteCommunitiesActionPerformed
 
@@ -451,6 +455,16 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
 
         communityName = txtCommunityName.getText();
         religion = txtReligion.getText();
+        
+        if(communityName.length() == 0 ||  religion.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(!communityName.matches("[a-zA-Z]+") || !religion.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Community and religion should have only alphabets.");
+            return;
+        }
 
         int selectedRowIndex = tblCities.getSelectedRow();
 
@@ -537,6 +551,16 @@ public class ModifyCommunityPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         cityName = txtCityName.getText();
         state = txtState.getText();
+        
+        if(cityName.length() == 0 ||  state.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(!cityName.matches("[a-zA-Z]+") || !state.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "City and state should have only alphabets.");
+            return;
+        }
         
         int selectedRowIndexCity = tblCities.getSelectedRow();
 

@@ -74,7 +74,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="318" max="-2" attributes="0"/>
                       <Component id="btnModifyComm" min="-2" pref="234" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       <Component id="btnModifyPerson" min="-2" pref="198" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -120,12 +120,12 @@
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="btnUpdateHouse" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnModifyComm" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnModifyPerson" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnModifyComm" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+              <EmptySpace pref="117" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

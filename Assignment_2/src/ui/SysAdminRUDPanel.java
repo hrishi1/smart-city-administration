@@ -103,14 +103,11 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
     private void populateHospitalsHousesTable(HospitalDir hospitalDir, HouseDir houseDir) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
-        System.out.println("Inside populate.");
         
         DefaultTableModel model = (DefaultTableModel) tblHospitals.getModel();
         model.setRowCount(0);
         
         for(Hospital c : hospitalDir.getHospitalDir()) {
-            
-            System.out.println("In the for loop.");
             
             Object[] row = new Object[11];
             //row[0] = house;
@@ -486,10 +483,10 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
 
     private void btnDeleteHospActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteHospActionPerformed
         // TODO add your handling code here:
-        System.out.println("Step 1");
-        
+       
         int selectedRowIndexCity = tblCities.getSelectedRow();
-
+        int flag = 0;
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a city.");
@@ -523,9 +520,7 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                 ArrayList<Community> comDir = communityDir.getCommunityDir();
                 
                 for(Community com: comDir) {
-                    if(com.getCommunityName().equalsIgnoreCase(communityName)) {
-                                               
-                        System.out.println("Step 2");
+                    if(com.getCommunityName().equalsIgnoreCase(communityName)) {                                                                       
                         
                         selectedRowIndexCity = tblHospitals.getSelectedRow();
 
@@ -536,9 +531,8 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                         }
                         
                         model = (DefaultTableModel) tblHospitals.getModel();
-                        String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
                         
-                        System.out.println("Step 3");
+                        String hospitalName = (String) model.getValueAt(selectedRowIndex, 0);
                         
                         HospitalDir hospDir = com.getHospitalDir();
                         
@@ -546,15 +540,13 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                         
                         for(Hospital h : hDir ) {
                             if(h.getHospitalName().equalsIgnoreCase(hospitalName)) {                                
-                                
-                                System.out.println("Before Delete");
                                 hospDir.deleteHospital(h);
-                                System.out.println("After Delete");
                                 
                                 if(com.getHospitalDir() != null) {
                                     populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
                                     JOptionPane.showMessageDialog(this, "Hospital deleted.");
                                 }
+                                flag =1 ;
                                 break;
                                 
                                
@@ -572,8 +564,12 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
                         
                         
                     }
+                    if(flag == 1)
+                                                    break;
                 }       
             }
+            if(flag == 1)
+                                                    break;
         }        
     }//GEN-LAST:event_btnDeleteHospActionPerformed
 
@@ -585,6 +581,16 @@ public class SysAdminRUDPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         hospitalName = txtHospitalName.getText();
 
+        if(!hospitalName.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
+        
+        if(hospitalName.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
         //Radio buttons
 
         if(radio1.isSelected() == true) {

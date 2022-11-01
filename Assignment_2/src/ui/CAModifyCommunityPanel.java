@@ -6,6 +6,7 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
@@ -15,6 +16,7 @@ import model.CityDir;
 import model.Community;
 import model.CommunityDir;
 import model.UserAuthDir;
+import static ui.SySAdminPanel.VALID_EMAIL_ADDRESS_REGEX;
 
 /**
  *
@@ -327,8 +329,9 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
     private void btnDeleteCommunitiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCommunitiesActionPerformed
         // TODO add your handling code here:
 
+        int flag = 0;
         int selectedRowIndexCity = tblCities.getSelectedRow();
-
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a row to city.");
@@ -368,10 +371,13 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
                         populateCommunitiesTable(communityDir);
                         
                         JOptionPane.showMessageDialog(this, "Community deleted!");
+                        flag = 1;
                         break;
                     }
                 }
             }
+            if(flag == 1)
+                                                    break;
         }
     }//GEN-LAST:event_btnDeleteCommunitiesActionPerformed
 
@@ -380,6 +386,19 @@ public class CAModifyCommunityPanel extends javax.swing.JPanel {
 
         communityName = txtCommunityName.getText();
         religion = txtReligion.getText();
+        
+        if(!communityName.matches("[a-zA-Z]+") || !religion.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
+        
+
+        
+        if(communityName.length() == 0 ||  religion.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+                
 
         int selectedRowIndex = tblCities.getSelectedRow();
 

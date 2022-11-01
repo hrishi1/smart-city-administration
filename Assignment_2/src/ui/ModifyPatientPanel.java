@@ -6,6 +6,7 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
@@ -25,6 +26,7 @@ import model.PatientDir;
 import model.Person;
 import model.PersonDir;
 import model.UserAuthDir;
+import static ui.PatientRegPanel.VALID_EMAIL_ADDRESS_REGEX;
 
 /**
  *
@@ -401,6 +403,20 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 
         //Getting all the data from user input
         fName = txtFname.getText();
+        
+       
+        
+        if(!fName.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
+        
+        
+        if(fName.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
 
         //Radio buttons
         
@@ -736,7 +752,8 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
     private void btnDeletePatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletePatientsActionPerformed
         // TODO add your handling code here:
         int selectedRowIndexCity = tblCities.getSelectedRow();
-
+        int flag = 0;
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a city.");
@@ -835,6 +852,8 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                                                             if(p.getFname().equalsIgnoreCase(patientName)) {
 
                                                                 personDir.deletePerson(p);
+                                                                flag = 1;
+                                                                JOptionPane.showMessageDialog(this, "Patient deleted.");
                                                                 break;
 
                                                             }
@@ -850,21 +869,25 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 //                                                        System.out.println("person:"+p.getFname());
 //                                                    }
                                                 }
+                                                if(flag == 1)
+                                                    break;
                                             }
 
-                                            break;
+                                            
                                         }
+                                        if(flag == 1)
+                                                    break;
                                     }
-                                }
-                                else {
-                                    JOptionPane.showMessageDialog(this, "No Patients available.");
-                                    return;
-                                }
+                                }                                
                             }
                         }
                     }
+                    if(flag == 1)
+                                                    break;
                 }
             }
+            if(flag == 1)
+                                                    break;
         }
     }//GEN-LAST:event_btnDeletePatientsActionPerformed
 

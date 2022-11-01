@@ -6,6 +6,8 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.scene.control.RadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
@@ -54,6 +56,9 @@ public class PatientRegPanel extends javax.swing.JPanel {
     private String insured;
     private String emergencyContact;
     private String name;
+    
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     
     private String cityName;
     
@@ -505,6 +510,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
             
     private void btnCreatePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreatePatientActionPerformed
         
+        try{
         //Getting all the data from user input
         fName = txtFname.getText();
         name = txtFname.getText();
@@ -515,7 +521,33 @@ public class PatientRegPanel extends javax.swing.JPanel {
         phone = txtPhone.getText();
         email = txtEmail.getText();
         emergencyContact = txtEmergencyContact.getText();
+        System.out.println(Long.parseLong(phone)+Long.parseLong(emergencyContact));
+        }
+        catch(Exception e) {
+        JOptionPane.showMessageDialog(this,"Age and Phone Number should be number.");
+        return;
+    }
         
+        if(!fName.matches("[a-zA-Z]+") || !lName.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
+        
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+        if(!matcher.find()) {
+            JOptionPane.showMessageDialog(this, "Invalid email.");
+            return;
+        }
+        
+        if(fName.length() == 0 ||  lName.length() == 0 || uName.length() == 0 || password.length() == 0 || email.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(phone.length() != 10) {
+            JOptionPane.showMessageDialog(this,"Phone number should be 10 digit long.");
+            return;
+        }
         
         int selectedRowIndex = tblHouses.getSelectedRow();
 
@@ -567,19 +599,35 @@ public class PatientRegPanel extends javax.swing.JPanel {
         if(radioInsuredYes.isSelected() == true) {
             insured = "Yes";
         }
-        else {
+        else if(radioInsuredNo.isSelected() == true) {
             insured = "No";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select patient insuranced.");
+            return;
         }
         
         if(radioMale.isSelected() == true) {
             gender = "Male";
         }
-        else {
+        else if(radioFemale.isSelected() == true){
             gender = "Female";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select patient gender.");
+            return;
         }
         
         model = (DefaultTableModel) tblHospitals.getModel();
         String selectedHospital = (String) model.getValueAt(selectedRowIndex, 0);
+        
+        //Checking for duplicate username
+        for(UserAuth ua: userAuthDir.getUserAuthDir()) {
+            if(ua.getUserName().equalsIgnoreCase(uName) && ua.getUserType().equalsIgnoreCase("Patient")) {
+                JOptionPane.showMessageDialog(this, "Username already exists!");
+                return;
+            }
+        }
         
         //Creating UserAuth object
         UserAuth ua = userAuthDir.addNewUserAuth();

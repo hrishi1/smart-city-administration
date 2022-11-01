@@ -427,7 +427,8 @@ public class HAModifyPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         int selectedRowIndexCity = tblCities.getSelectedRow();
-
+        int flag = 0;
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a row to city.");
@@ -486,6 +487,7 @@ public class HAModifyPanel extends javax.swing.JPanel {
                                 
                                 populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
                                 JOptionPane.showMessageDialog(this, "Hospital deleted!");
+                                flag = 1;
                                 break;
                                 
                                
@@ -503,8 +505,13 @@ public class HAModifyPanel extends javax.swing.JPanel {
                         
                         
                     }
+                    if(flag == 1)
+                                                    break;
                 }       
+                
             }
+            if(flag == 1)
+                                                    break;
         }        
     }//GEN-LAST:event_btnDeleteHospActionPerformed
 
@@ -515,6 +522,16 @@ public class HAModifyPanel extends javax.swing.JPanel {
     private void btnUpdateHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateHospitalActionPerformed
         // TODO add your handling code here:
         hospitalName = txtHospitalName.getText();
+        
+        if(!hospitalName.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
+        
+        if(hospitalName.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
 
         //Radio buttons
 

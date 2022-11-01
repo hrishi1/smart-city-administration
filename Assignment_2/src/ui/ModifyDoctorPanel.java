@@ -413,6 +413,26 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
         fName = txtFname.getText();
         qualification = txtQualification.getText();
         specialization = txtSpecialization.getText();
+        
+        if(fName.length() == 0 ||  qualification.length() == 0 ||  specialization.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(!fName.matches("[a-zA-Z]+") || !qualification.matches("[a-zA-Z]+") || !specialization.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "All fields should have only alphabets.");
+            return;
+        }
+        
+        if(!fName.matches("[a-zA-Z]+") || !specialization.matches("[a-zA-Z]+") || !qualification.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
+       
+        if(fName.length() == 0  || qualification.length() == 0 || specialization.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
 
 
         int selectedRowIndex = tblCities.getSelectedRow();
@@ -751,7 +771,8 @@ if(com.getCommunityName().contains(communityName)) {
     private void btnDeleteDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteDoctorActionPerformed
         // TODO add your handling code here:
         int selectedRowIndexCity = tblCities.getSelectedRow();
-
+        int flag = 0;
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a city.");
@@ -763,7 +784,8 @@ if(com.getCommunityName().contains(communityName)) {
         String cityName = (String) model.getValueAt(selectedRowIndexCity, 0);
 
         ArrayList<City> cDir = cityDir.getCityDir();
-
+        
+        
         for(City c: cDir) {
             if(c.getCityName().equalsIgnoreCase(cityName)) {
 
@@ -858,6 +880,8 @@ if(com.getCommunityName().contains(communityName)) {
                                                                 
                                                                 personDir.deletePerson(p);
                                                                 JOptionPane.showMessageDialog(this, "Doctor deleted!");
+                                                                
+                                                                flag = 1;
 
                                                                 break;
 
@@ -867,17 +891,22 @@ if(com.getCommunityName().contains(communityName)) {
                                                     }
 
                                                     //Test
-                                                                                                                    PersonDir personDir = hs.getPersonDir();
-                                                                                                                    ArrayList<Person> p_temp = personDir.getPersonDir();
-                                                    
-                                                                                                                    for(Person p : p_temp) {
-                                                                                                                                System.out.println("person:"+p.getFname());
-                                                                                                                            }
+//                                                                                                                    PersonDir personDir = hs.getPersonDir();
+//                                                                                                                    ArrayList<Person> p_temp = personDir.getPersonDir();
+//                                                    
+//                                                                                                                    for(Person p : p_temp) {
+//                                                                                                                                System.out.println("person:"+p.getFname());
+//                                                                                                                            }
                                                 }
+                                                if(flag == 1)
+                                                    break;
                                             }
                                             
-                                            break;
+                                            
                                         }
+                                        
+                                        if(flag == 1)
+                                                    break;
                                     }
                                 }
                                 else {
@@ -885,10 +914,16 @@ if(com.getCommunityName().contains(communityName)) {
                                     return;
                                 }
                             }
+                            if(flag == 1)
+                                                    break;
                         }        
                     }
+                    if(flag == 1)
+                                                    break;
                 }
             }
+            if(flag == 1)
+                                                    break;
         }
     }//GEN-LAST:event_btnDeleteDoctorActionPerformed
 

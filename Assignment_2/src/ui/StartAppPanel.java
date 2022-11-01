@@ -6,6 +6,7 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
@@ -23,6 +24,7 @@ import model.HospitalDir;
 import model.Patient;
 import model.UserAuthDir;
 import model.VitalSigns;
+import static ui.PatientRegPanel.VALID_EMAIL_ADDRESS_REGEX;
 
 /**
  *
@@ -196,18 +198,45 @@ public class StartAppPanel extends javax.swing.JPanel {
     private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
         // TODO add your handling code here:
         
+        try{
         disease = txtDisease.getText();
         bodyTemperature = txtTemp.getText();
         pulseRate = Integer.parseInt(txtPulse.getText());
         bloodPressure = Integer.parseInt(txtPressure.getText());
+        System.out.println(Double.parseDouble(bodyTemperature));
+        }
+        catch(Exception e) {
+        JOptionPane.showMessageDialog(this,"Vitals should be numeric.");
+        return;
+    }
+        
+        if(!disease.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
+        
+        
+        if(disease.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        
+        
+        
+        int flag = 0;
         
         //Radio buttons
         
         if(radioEmg.isSelected() == true) {
             encounterType = "Emergency";
         }
-        else {
+        else if(radioOPD.isSelected() == true) {
             encounterType = "OPD";
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Please select encounter type.");
+            return;
         }
         
         
@@ -279,9 +308,15 @@ public class StartAppPanel extends javax.swing.JPanel {
                                         for(Appointment a:app) {
                                             if(a.getPatientName() == patientName) {
                                                 d.getAppDir().deleteAppointment(a);
+                                                flag = 1;
+                                                break;
                                             }
                                         }
                                     }
+                                    if(flag == 1) {
+                                        break;
+                                    }
+                                    
                                 }
                                 
                                 for(Patient p: h.getPatientDir().getPatientDir()) {
@@ -306,7 +341,7 @@ public class StartAppPanel extends javax.swing.JPanel {
                                             enc.setV(vs);
                                             
                                             
-                                            
+                                            flag = 1;
                                             JOptionPane.showMessageDialog(this, "Appointment complete!");
                                             
                                         }
@@ -329,19 +364,22 @@ public class StartAppPanel extends javax.swing.JPanel {
                                             enc.setV(vs);
                                             
                                             p.setEncounterHistory(encHist);
-                                            
+                                            flag = 1;
                                             JOptionPane.showMessageDialog(this, "Appointment complete!");
                                             
                                             
                                         }
+                                    }
+                                    if(flag == 1) {
+                                        break;
+                                    }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
-        }
+            }        
     }//GEN-LAST:event_btnCompleteActionPerformed
 
     private void btnBackToDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToDocActionPerformed

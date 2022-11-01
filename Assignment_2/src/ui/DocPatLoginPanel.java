@@ -780,6 +780,11 @@ public class DocPatLoginPanel extends javax.swing.JPanel {
         uname = txtUname.getText();
         password = txtPassword.getText();        
         
+        if(uname.length() == 0 ||  password.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
         //Radio buttons
 
 

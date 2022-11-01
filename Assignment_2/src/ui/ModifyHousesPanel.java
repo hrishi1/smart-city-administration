@@ -368,7 +368,8 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         int selectedRowIndexCity = tblCities.getSelectedRow();
-
+        int flag =0 ;
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a city.");
@@ -426,6 +427,7 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                                 populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
                                 
                                 JOptionPane.showMessageDialog(this, "House deleted!");
+                                flag = 1;
                                 break;
 
                                 //Test
@@ -438,8 +440,12 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
                         }
 
                     }
+                    if(flag == 1)
+                                                    break;
                 }
             }
+            if(flag == 1)
+                                                    break;
         }
     }//GEN-LAST:event_btnDeleteHousesActionPerformed
 

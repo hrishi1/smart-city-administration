@@ -148,14 +148,10 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(workAreaLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(workAreaLayout.createSequentialGroup()
-                        .addGroup(workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDetails)
-                            .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(703, Short.MAX_VALUE))
-                    .addGroup(workAreaLayout.createSequentialGroup()
-                        .addComponent(lblDetails2)
-                        .addGap(33, 890, Short.MAX_VALUE))))
+                    .addComponent(lblDetails)
+                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDetails2))
+                .addContainerGap(703, Short.MAX_VALUE))
         );
         workAreaLayout.setVerticalGroup(
             workAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,22 +190,20 @@ public class MainJFrame extends javax.swing.JFrame {
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPatientRegister)
-                    .addGroup(controlPanelLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(btnLogin)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPatientRegister, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addComponent(btnLogin)
-                .addGap(18, 18, 18)
+                .addGap(61, 61, 61)
                 .addComponent(btnPatientRegister)
-                .addContainerGap(570, Short.MAX_VALUE))
+                .addContainerGap(527, Short.MAX_VALUE))
         );
 
         splitPane.setLeftComponent(controlPanel);

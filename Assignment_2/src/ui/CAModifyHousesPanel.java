@@ -287,7 +287,7 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(318, 318, 318)
                         .addComponent(btnModifyComm, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83)
+                        .addGap(98, 98, 98)
                         .addComponent(btnModifyPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
@@ -323,18 +323,19 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                     .addComponent(txtZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(btnUpdateHouse)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModifyComm)
-                    .addComponent(btnModifyPerson))
-                .addGap(90, 90, 90))
+                    .addComponent(btnModifyPerson)
+                    .addComponent(btnModifyComm))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDisplayHousesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisplayHousesActionPerformed
         // TODO add your handling code here:
         int selectedRowIndexCity = tblCities.getSelectedRow();
-
+        int flag = 0;
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a row to city.");
@@ -370,9 +371,12 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                     if(com.getCommunityName().contains(communityName)) {
                         if(com.getHouseDir() != null) {
                             populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                            flag = 1;                            
                         }
                         else {
                             populateHospitalsHousesTable(new HospitalDir(),new HouseDir());
+                            flag = 1;
+                            
                         }
                     }
                 }
@@ -385,6 +389,8 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
 
         int selectedRowIndexCity = tblCities.getSelectedRow();
 
+        int flag = 0;
+        
         if (selectedRowIndexCity < 0 ) {
 
             JOptionPane.showMessageDialog(this, "Please select a row to city.");
@@ -440,6 +446,8 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                                 houseDir.deleteHouse(h);
 
                                 populateHospitalsHousesTable(com.getHospitalDir(),com.getHouseDir());
+                                flag = 1;
+                                JOptionPane.showMessageDialog(this, "House deleted.");
                                 break;
 
                                 //Test
@@ -452,8 +460,12 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
                         }
 
                     }
+                    if(flag == 1)
+                                                    break;
                 }
             }
+            if(flag == 1)
+                                                    break;
         }
     }//GEN-LAST:event_btnDeleteHousesActionPerformed
 
@@ -491,11 +503,28 @@ public class CAModifyHousesPanel extends javax.swing.JPanel {
 
     private void btnUpdateHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateHouseActionPerformed
         // TODO add your handling code here:
-
+        
+        try {
         houseNum = txtHouseNum.getText();
         houseID = txtHouseID.getText();
         street = txtStreet.getText();
         zipCode = txtZip.getText();
+        System.out.println(Long.parseLong(houseNum)+Long.parseLong(houseID)+Long.parseLong(zipCode));
+        }
+        catch(Exception e) {
+        JOptionPane.showMessageDialog(this,"Number, ID and zip code should be number.");
+        return;
+    }
+        
+        if(!street.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }       
+        
+        if(street.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
 
         int selectedRowIndex = tblCities.getSelectedRow();
 

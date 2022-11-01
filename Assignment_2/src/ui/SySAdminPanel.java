@@ -6,6 +6,8 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
@@ -54,6 +56,9 @@ public class SySAdminPanel extends javax.swing.JPanel {
     private String email;
     private String qualification;
     private String specialization;
+    
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+    Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     
     JSplitPane splitPane;
     
@@ -532,6 +537,7 @@ public class SySAdminPanel extends javax.swing.JPanel {
     private void btnCreateDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateDoctorActionPerformed
 
         //Getting all the data from user input
+        try {
         fName = txtFname.getText();
         name = txtFname.getText();
         lName = txtLname.getText();
@@ -542,6 +548,36 @@ public class SySAdminPanel extends javax.swing.JPanel {
         email = txtEmail.getText();
         qualification = txtQualification.getText();
         specialization = txtSpecialization.getText();
+        System.out.println(Long.parseLong(phone));
+        }
+        catch(Exception e) {
+        JOptionPane.showMessageDialog(this,"Age and Phone Number should be number.");
+        return;
+    }
+        
+        if(!fName.matches("[a-zA-Z]+") || !lName.matches("[a-zA-Z]+") || !specialization.matches("[a-zA-Z]+") || !qualification.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
+        
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
+        if(!matcher.find()) {
+            JOptionPane.showMessageDialog(this, "Invalid email.");
+            return;
+        }
+        
+        if(fName.length() == 0 ||  lName.length() == 0 || uName.length() == 0 || password.length() == 0 || email.length() == 0 || qualification.length() == 0 || specialization.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(phone.length() != 10) {
+            JOptionPane.showMessageDialog(this,"Phone number should be 10 digit long.");
+            return;
+        }
+        
+        
+        
 
         int selectedRowIndex = tblHouses.getSelectedRow();
 
@@ -601,6 +637,15 @@ public class SySAdminPanel extends javax.swing.JPanel {
         model = (DefaultTableModel) tblHospitals.getModel();
         String selectedHospital = (String) model.getValueAt(selectedRowIndex, 0);
 
+        
+        //Checking for duplicate username
+        for(UserAuth ua: userAuthDir.getUserAuthDir()) {
+            if(ua.getUserName().equalsIgnoreCase(uName) && ua.getUserType().equalsIgnoreCase("Doctor")) {
+                JOptionPane.showMessageDialog(this, "Username already exists!");
+                return;
+            }
+        }
+        
         //Creating UserAuth object
         UserAuth ua = userAuthDir.addNewUserAuth();
 

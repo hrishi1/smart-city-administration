@@ -551,6 +551,16 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
         cityName = txtCityName.getText();
         state = txtState.getText();
         
+        if(cityName.length() == 0 ||  state.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(!cityName.matches("[a-zA-Z]+") || !state.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "City and state should have only alphabets.");
+            return;
+        }
+        
         City c = cityDir.addNewCity();
         
         c.setCityName(cityName);
@@ -566,6 +576,17 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
         
         communityName = txtCommunityName.getText();
         religion = txtReligion.getText();
+        
+        if(communityName.length() == 0 ||  religion.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(!communityName.matches("[a-zA-Z]+") || !religion.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name and religion should have only alphabets.");
+            return;
+        }
+        
         
         int selectedRowIndex = tblCities.getSelectedRow();
 
@@ -647,6 +668,16 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
     private void btnCreateHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateHospitalActionPerformed
         // TODO add your handling code here:
         hospitalName = txtHospitalName.getText();
+        
+        if(hospitalName.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(!hospitalName.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }
         
         //Radio buttons        
 
@@ -752,11 +783,41 @@ public class CreateResourcesPanel extends javax.swing.JPanel {
 
     private void btnCreateHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateHouseActionPerformed
         // TODO add your handling code here:
-        
+        try {
         houseNum = txtHouseNum.getText();
         houseID = txtHouseID.getText();
         street = txtStreet.getText();
         zipCode = txtZip.getText();
+        System.out.println(Long.parseLong(houseNum)+Long.parseLong(houseID)+Long.parseLong(zipCode));
+        }
+        catch(Exception e) {
+        JOptionPane.showMessageDialog(this,"Number, ID and zip code should be number.");
+        return;
+    }
+        
+        if(!street.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }       
+        
+        if(street.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+
+        
+        
+        if(communityName.length() == 0 ||  religion.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
+        
+        if(!communityName.matches("[a-zA-Z]+") || !religion.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name and religion should have only alphabets.");
+            return;
+        }
+        
+        
         
         int selectedRowIndex = tblCities.getSelectedRow();
 
