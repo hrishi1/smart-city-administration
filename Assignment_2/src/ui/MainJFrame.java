@@ -235,10 +235,14 @@ public class MainJFrame extends javax.swing.JFrame {
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-            
+        
+        try {
         LoginPanel l = new LoginPanel(cityDir,userAuthDir,splitPane);
             splitPane.setRightComponent(l);
-            
+        }
+        catch(Exception e) {
+            System.out.print("");
+        }
 //            System.out.println(TempPanel.getLayout().getClass());
 //            
 //            CardLayout card = (CardLayout) TempPanel.getLayout();

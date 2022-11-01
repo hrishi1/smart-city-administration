@@ -532,6 +532,8 @@ public class ModifyDoctorPanel extends javax.swing.JPanel {
                                             d.setQualification(qualification);
                                             d.setSpecialization(specialization);
                                             
+                                            JOptionPane.showMessageDialog(this, "Doctor updated.");
+                                            
 //                                            Doctor updatedDoc = new Doctor();
 //                                            updatedDoc.setName(fName);
 //                                            updatedDoc.setQualification(qualification);
@@ -856,6 +858,7 @@ if(com.getCommunityName().contains(communityName)) {
                                             
                                             docDir.deleteDoctor(d);
                                             populateDoctors(docDir);
+                                            JOptionPane.showMessageDialog(this, "Doctor deleted!");
                                             
                                             
                                             String doctorHouse = d.getHouseID();
@@ -878,8 +881,7 @@ if(com.getCommunityName().contains(communityName)) {
 
                                                             if(p.getFname().equalsIgnoreCase(doctorName)) {
                                                                 
-                                                                personDir.deletePerson(p);
-                                                                JOptionPane.showMessageDialog(this, "Doctor deleted!");
+                                                                personDir.deletePerson(p);                                                                
                                                                 
                                                                 flag = 1;
 

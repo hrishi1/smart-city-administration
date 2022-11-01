@@ -171,8 +171,7 @@ public class LoginPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_radioSysAdActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:        
         uname = txtUname.getText();
         password = txtPassword.getText();
         

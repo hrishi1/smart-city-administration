@@ -544,7 +544,7 @@ public class PatientRegPanel extends javax.swing.JPanel {
             return;
         }
         
-        if(phone.length() != 10) {
+        if(phone.length() != 10 || emergencyContact.length() != 10 ) {
             JOptionPane.showMessageDialog(this,"Phone number should be 10 digit long.");
             return;
         }

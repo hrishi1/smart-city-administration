@@ -481,10 +481,27 @@ public class ModifyHousesPanel extends javax.swing.JPanel {
     private void btnCreateHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateHouseActionPerformed
         // TODO add your handling code here:
 
+        try {
         houseNum = txtHouseNum.getText();
         houseID = txtHouseID.getText();
         street = txtStreet.getText();
         zipCode = txtZip.getText();
+        System.out.println(Long.parseLong(houseNum)+Long.parseLong(houseID)+Long.parseLong(zipCode));
+        }
+        catch(Exception e) {
+        JOptionPane.showMessageDialog(this,"Number, ID and zip code should be numeric.");
+        return;
+    }
+        
+        if(!street.matches("[a-zA-Z]+")) {
+            JOptionPane.showMessageDialog(this, "Name should have only alphabets.");
+            return;
+        }       
+        
+        if(street.length() == 0) {
+            JOptionPane.showMessageDialog(this, "All fields are mandatory.");
+            return;
+        }
 
         int selectedRowIndex = tblCities.getSelectedRow();
 

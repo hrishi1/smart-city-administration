@@ -403,7 +403,7 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 
         //Getting all the data from user input
         fName = txtFname.getText();
-        
+        int flag = 0;
        
         
         if(!fName.matches("[a-zA-Z]+")) {
@@ -561,7 +561,8 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 //                                                                personDir.updatePerson(p, person);
                                                                 
                                                                 JOptionPane.showMessageDialog(this, "Patient updated!");
-
+                                                                flag = 1;
+                                                                break;
                                                             }
                                                         }
 
@@ -575,10 +576,17 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 //                                                        System.out.println("person:"+p.getFname());
 //                                                    }
                                                 }
+                                                if(flag == 1 ){
+                                                    break;
+                                                }
                                             }
 
-                                            break;
+                                            
                                         }
+                                        
+                                        if(flag == 1 ){
+                                                    break;
+                                                }
                                     }
                                 }
                                 //Test
@@ -590,11 +598,20 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
                                     //                                                                    }
 
                             }
+                            if(flag == 1 ){
+                                                    break;
+                                                }
                         }
                     }
+                    if(flag == 1 ){
+                                                    break;
+                                                }
 
                 }
             }
+            if(flag == 1 ){
+                                                    break;
+                                                }
         }
     }//GEN-LAST:event_btnUpdatePatientActionPerformed
 
@@ -830,7 +847,9 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 
                                             patDir.deletePatient(d);
                                             populatePatients(patDir);
-
+                                            
+                                            JOptionPane.showMessageDialog(this, "Patient deleted.");
+                                            
                                             String doctorHouse = d.getHouseID();
 
                                             //Traversing houses to find the selected house
@@ -853,7 +872,7 @@ public class ModifyPatientPanel extends javax.swing.JPanel {
 
                                                                 personDir.deletePerson(p);
                                                                 flag = 1;
-                                                                JOptionPane.showMessageDialog(this, "Patient deleted.");
+                                                                
                                                                 break;
 
                                                             }
